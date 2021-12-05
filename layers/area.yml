@@ -1,0 +1,23 @@
+id: area
+type: fill
+source: v
+source-layer: area
+paint: 
+  fill-color: 
+    - match
+    - - get
+      - 図式コード
+    - 9501
+    - rgb(214, 216, 212)
+    - 9601
+    - rgb(205, 230, 253)
+    - rgb(255, 0, 0)
+  fill-opacity: 
+    - interpolate
+    - - exponential
+      - 2
+    - - zoom
+    - 8
+    - 0
+    - 12
+    - 1

@@ -2,4 +2,4 @@
 
 cd /app
 make
-make serve
+make tile_server

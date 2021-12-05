@@ -1,0 +1,10 @@
+id: background
+type: background
+paint: 
+  background-color: 
+    - step
+    - - zoom
+    - rgb(255, 255, 255)
+    - 13
+    - rgb(161, 229, 252)
+

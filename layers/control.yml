@@ -1,0 +1,20 @@
+id: control
+type: symbol
+source: v
+source-layer: point
+filter: 
+  - match
+  - - get
+    - 図式コード
+  - - 2102
+    - 2103
+    - 8103
+  - true
+  - false
+layout:
+  text-field:
+    - get
+    - 標高
+  text-font:
+    - NotoSansCJKjp-Regular
+  text-size: 10

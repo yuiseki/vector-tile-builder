@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  vector-tile-builder:
+  tile_server:
     image: yuiseki/vector-tile-builder
     build:
       dockerfile: Dockerfile
@@ -10,5 +10,17 @@ services:
     entrypoint: "/app/entrypoint.sh"
     volumes:
       - ./docs:/app/docs
-      - ./src:/app/src
       - ./tmp:/app/tmp
+    ports:
+      - "9090:9090"
+  charites:
+    image: yuiseki/vector-tile-builder
+    build:
+      dockerfile: Dockerfile
+      context: .
+    env_file: .env
+    command: make charites_server
+    volumes:
+      - ./docs:/app/docs
+    ports:
+      - "8080:8080"

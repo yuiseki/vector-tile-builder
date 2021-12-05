@@ -1,0 +1,28 @@
+version: 8
+center:
+  - 139.7673068
+  - 35.6809591
+zoom: 8
+sources:
+  v:
+    type: vector
+    attribution: OpenStreetMap
+    minzoom: 0
+    maxzoom: 15
+    tiles:
+      - http://localhost:9090/zxy/{z}/{x}/{y}.pbf
+glyphs: https://maps.gsi.go.jp/xyz/noto-jp/{fontstack}/{range}.pbf 
+sprite: https://sprites.geolonia.com/basic
+layers:
+  - !!inc/file layers/background.yml
+  - !!inc/file layers/area.yml
+  - !!inc/file layers/coastline.yml
+  - !!inc/file layers/contour.yml
+  - !!inc/file layers/contour-dash.yml
+  - !!inc/file layers/boundary.yml
+  - !!inc/file layers/road.yml
+  - !!inc/file layers/pipeline.yml
+  - !!inc/file layers/building.yml
+  - !!inc/file layers/control.yml
+  - !!inc/file layers/symbol.yml
+  - !!inc/file layers/annotation.yml

@@ -1,0 +1,24 @@
+id: annotataion
+type: symbol
+source: v
+source-layer: point
+filter: 
+  - match
+  - - get
+    - 図式コード
+  - - 100
+  - true
+  - false
+layout:
+  text-field: 
+    - get
+    - 名称
+  text-size: 14
+  text-font:
+    - NotoSansCJKjp-Regular
+  text-rotate:
+    - '*'
+    - -1
+    - - get
+      - 回転角度
+  text-rotation-alignment: map

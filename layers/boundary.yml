@@ -1,0 +1,17 @@
+id: boundary
+type: line
+source: v
+source-layer: line
+filter: 
+  - match
+  - - get
+    - 図式コード
+  - 7101
+  - true
+  - false
+paint: 
+  line-color: rgb(146, 146, 146)
+  line-width: 2
+  line-dasharray: 
+    - 5
+    - 2

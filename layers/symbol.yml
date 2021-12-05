@@ -1,0 +1,33 @@
+id: symbol
+type: symbol
+source: v
+source-layer: point
+filter: 
+  - match
+  - - get
+    - 図式コード
+  - - 6101
+    - 6111
+    - 7201
+  - true
+  - false
+layout:
+  icon-image: communications-tower-15
+  text-offset: 
+    - 0
+    - 1 
+  text-size: 12
+  text-max-width: 12
+  text-field:
+    - match
+    - - get
+      - 図式コード
+    - 6101
+    - 高塔
+    - 6111
+    - 電波塔
+    - 7201
+    - アデリーペンギン繁殖地
+    - symbol エラー
+  text-font:
+    - NotoSansCJKjp-Regular

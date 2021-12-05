@@ -9,6 +9,7 @@ RUN apt-get update && \
   curl \
   git \
   build-essential \
+  sqlite3 \
   libsqlite3-dev \
   zlib1g-dev \
   jq \
@@ -24,7 +25,13 @@ RUN curl -Ls https://deb.nodesource.com/setup_16.x | bash
 RUN apt-get update && apt-get install -y nodejs \
       && rm -rf /var/lib/apt/lists/*
 
-RUN npm i -g @unvt/charites
+RUN git clone https://github.com/unvt/charites.git && \
+  cd charites && \
+  npm ci && \
+  npm run build && \
+  npm i -g .
+
+RUN npm i -g http-server
 
 WORKDIR /app
 

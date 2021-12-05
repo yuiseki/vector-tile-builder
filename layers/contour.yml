@@ -1,0 +1,59 @@
+id: contour
+type: line
+source: v
+source-layer: contour
+filter: 
+  - match
+  - - get
+    - 図式コード
+  - - 8201
+    - 8204
+    - 8211
+    - 8214
+    - 8811
+    - 9201
+    - 9024
+    - 9211
+    - 9212
+    - 9214
+    - 9221
+    - 9224
+  - true
+  - false
+paint:
+  line-color: 
+    - match
+    - - get
+      - 図式コード
+    - - 9201
+      - 9204
+      - 9211
+      - 9212
+      - 9214
+      - 9221
+      - 9224
+    - rgb(72, 131, 247)
+    - rgb(136, 89, 82)
+  line-opacity: 
+    - interpolate
+    - - exponential
+      - 2
+    - - zoom
+    - 8
+    - 0
+    - 12
+    - 1
+  line-width:
+    - step
+    - - zoom
+    - 0.7
+    - 14
+    - - match
+      - - get
+        - 図式コード
+      - - 8201
+        - 8204
+        - 9201
+        - 9204
+      - 1.4
+      - 0.7

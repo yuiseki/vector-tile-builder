@@ -1,0 +1,12 @@
+id: building
+type: fill
+source: v
+source-layer: building
+paint:
+  fill-color: 
+    - match
+    - - get
+      - 図式コード
+    - 5111
+    - rgb(96, 108, 166)
+    - rgb(208, 151, 94)

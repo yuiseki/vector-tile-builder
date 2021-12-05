@@ -1,0 +1,14 @@
+id: pipeline
+type: line
+source: v
+source-layer: line
+filter: 
+  - match
+  - - get
+    - 図式コード
+  - 4151
+  - true
+  - false
+paint: 
+  line-color: rgb(136, 136, 136)
+  line-width: 2.6
