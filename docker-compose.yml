@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  vector-tile-builder:
+    image: yuiseki/vector-tile-builder
+    build:
+      dockerfile: Dockerfile
+      context: .
+    env_file: .env
+    entrypoint: "/app/entrypoint.sh"
+    volumes:
+      - ./docs:/app/docs
+      - ./src:/app/src
+      - ./tmp:/app/tmp
