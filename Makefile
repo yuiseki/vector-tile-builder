@@ -55,4 +55,4 @@ $(zxy_metadata):
 				--no-tile-stats \
 				--output-to-directory=/tmp/zxy \
 				/$(mbtiles)
-	cp -r tmp/zxy docs/zxy
+	cp -r tmp/zxy docs/
