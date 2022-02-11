@@ -38,7 +38,7 @@ $(mbtiles):
 			--output /$(mbtiles)
 
 $(tilejson):
-	mbtiles2tilejson tmp/region.mbtiles --url $(GITHUB_PAGES) > $@
+	mbtiles2tilejson tmp/region.mbtiles --url $(GITHUB_PAGES)zxy/ > $@
 
 # Split MBTiles Format file to zxy orderd Protocolbuffer Binary Format files
 $(zxy_metadata):

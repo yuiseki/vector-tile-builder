@@ -188,5 +188,7 @@
       "maxzoom": 14
     }
   ],
-  "tiles": "https://yuiseki.github.io/vector-tile-builder/{z}/{x}/{y}.pbf"
+  "tiles": [
+    "https://yuiseki.github.io/vector-tile-builder/zxy/{z}/{x}/{y}.pbf"
+  ]
 }
