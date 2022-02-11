@@ -1,26 +1,24 @@
 version: "3"
 
 services:
-  tile_server:
+  tile_builder:
     image: yuiseki/vector-tile-builder
     build:
       dockerfile: Dockerfile
       context: .
     env_file: .env
-    entrypoint: "/app/entrypoint.sh"
+    entrypoint: "tileserver-gl-light"
     volumes:
       - ./docs:/app/docs
       - ./tmp:/app/tmp
     ports:
-      - "9090:9090"
-  charites:
-    image: yuiseki/vector-tile-builder
-    build:
-      dockerfile: Dockerfile
-      context: .
-    env_file: .env
-    command: make charites_server
+      - "3000:3000"
+  mbtileserver:
+    image: consbio/mbtileserver:latest
+    container_name: mbtileserver
+    entrypoint: /mbtileserver --enable-reload-signal
+    restart: always
     volumes:
-      - ./docs:/app/docs
+      - ./tmp:/tilesets
     ports:
-      - "8080:8080"
+      - 8080:8000

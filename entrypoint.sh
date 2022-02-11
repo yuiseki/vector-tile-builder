@@ -2,4 +2,4 @@
 
 cd /app
 make
-make tile_server
+tileserver-gl-light tmp/region.mbtiles
