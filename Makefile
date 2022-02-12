@@ -1,4 +1,4 @@
-include .env
+include .env.local
 
 pbf = tmp/$(REGION)-latest.osm.pbf
 mbtiles = tmp/region.mbtiles
@@ -24,7 +24,18 @@ clean:
 docker-build:
 	docker image inspect vector-tile-builder || docker build . -t vector-tile-builder
 
-# Download OpenStreetMap data as Protocolbuffer Binary Format file
+.PHONY: start
+start:
+	docker run \
+		-it \
+		--rm \
+		--mount type=bind,source=$(CURDIR)/docs,target=/app/docs \
+		vector-tile-builder \
+			http-server \
+				-p 80 \
+				docs
+
+# Download OpenStreetMap data as Protocolbuffer Binary format file
 $(pbf):
 	mkdir -p $(@D)
 	curl \
@@ -32,7 +43,7 @@ $(pbf):
 		--output $(pbf) \
 		https://download.geofabrik.de/$(REGION)-latest.osm.pbf
 
-# Convert Protocolbuffer Binary Format file to MBTiles format file
+# Convert Protocolbuffer Binary format file to MBTiles format file
 $(mbtiles):
 	mkdir -p $(@D)
 	docker run \
@@ -45,6 +56,7 @@ $(mbtiles):
 				--input /$(pbf) \
 				--output /$(mbtiles)
 
+# Generate TileJSON format file from MBTiles format file
 $(tilejson):
 	mkdir -p $(@D)
 	docker run \
@@ -54,10 +66,9 @@ $(tilejson):
 		vector-tile-builder \
 			mbtiles2tilejson \
 				/tmp/region.mbtiles \
-				--url $(TILES_URL) > /tmp/tiles.json
-	cp tmp/tiles.json docs/
+				--url $(TILES_URL) > docs/tiles.json
 
-# Split MBTiles Format file to zxy orderd Protocolbuffer Binary Format files
+# Split MBTiles format file to zxy orderd Protocolbuffer Binary format files
 $(zxy_metadata):
 	mkdir -p $(@D)
 	docker run \

@@ -21,3 +21,9 @@ Run `make`
 ```
 make
 ```
+
+## Launch as local area network vector tile maps server
+
+Set `TILES_URL` like as `http://hostname/zxy/`
+Run `make`
+Run `make start`
