@@ -54,7 +54,7 @@ $(tilejson):
 		vector-tile-builder \
 			mbtiles2tilejson \
 				/tmp/region.mbtiles \
-				--url $(GITHUB_PAGES)zxy > /tmp/tiles.json
+				--url $(TILES_URL) > /tmp/tiles.json
 	cp tmp/tiles.json docs/
 
 # Split MBTiles Format file to zxy orderd Protocolbuffer Binary Format files

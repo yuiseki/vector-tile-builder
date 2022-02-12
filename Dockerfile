@@ -44,6 +44,7 @@ RUN apt-get update && apt-get install -y nodejs \
       && rm -rf /var/lib/apt/lists/*
 
 RUN npm i -g mbtiles2tilejson
+RUN npm i -g http-server
 
 WORKDIR /app
 
