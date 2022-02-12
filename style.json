@@ -22,7 +22,7 @@
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "url": "https://yuiseki.github.io/vector-tile-builder/tiles.json"
+      "url": "./tiles.json"
     }
   },
   "sprite": "https://openmaptiles.github.io/osm-bright-gl-style/sprite",
