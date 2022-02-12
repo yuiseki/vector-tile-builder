@@ -3,8 +3,9 @@
 ## Requirements
 
 - git
-- GNU make
 - curl
+- GNU sed
+- GNU make
 - Docker
 
 ## Create vector tile maps on GitHub Pages
@@ -40,8 +41,11 @@ make clean
 make
 ```
 
-### Commit and Push changes
+### Create `gh-pages` branch
 
-Wait Deploy of GitHub Pages...
+```
+make gh-pages
+git push
+```
 
 ### See GitHub Pages
