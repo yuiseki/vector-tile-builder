@@ -20,30 +20,10 @@ clean:
 	rm -rf docs/zxy/*
 	rm -f docs/tiles.json
 
+# Build the `vector-tile-builder` docker image if not exists, must important step of this Makefile
 .PHONY: docker-build
 docker-build:
 	docker image inspect vector-tile-builder || docker build . -t vector-tile-builder
-
-# Launch local server
-.PHONY: start
-start:
-	docker run \
-		-it \
-		--rm \
-		--mount type=bind,source=$(CURDIR)/docs,target=/app/docs \
-		vector-tile-builder \
-			http-server \
-				-p $(PORT) \
-				docs
-
-.PHONY: gh-pages
-gh-pages:
-	sed -i '/docs/d' ./.gitignore
-	git add .
-	git commit -m "Edit .gitignore to publish"
-	git push origin `git subtree split --prefix docs main`:gh-pages --force
-	git reset HEAD~
-	git checkout .gitignore
 
 # Download OpenStreetMap data as Protocolbuffer Binary format file
 $(pbf):
@@ -94,3 +74,25 @@ $(zxy_metadata):
 				--output-to-directory=/tmp/zxy \
 				/$(mbtiles)
 	cp -r tmp/zxy docs/
+
+# Publish ./docs to GitHub Pages, with ignoring .gitignore
+.PHONY: gh-pages
+gh-pages:
+	sed -i '/docs/d' ./.gitignore
+	git add .
+	git commit -m "Edit .gitignore to publish"
+	git push origin `git subtree split --prefix docs main`:gh-pages --force
+	git reset HEAD~
+	git checkout .gitignore
+
+# Launch local server
+.PHONY: start
+start:
+	docker run \
+		-it \
+		--rm \
+		--mount type=bind,source=$(CURDIR)/docs,target=/app/docs \
+		vector-tile-builder \
+			http-server \
+				-p $(PORT) \
+				docs
