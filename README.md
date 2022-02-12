@@ -15,7 +15,7 @@ Why don't you believe GNU?
 
 ### Click `Use this template` button of this repository
 
-Decide the name of repository of your new maps.
+Decide the name of repository of your new maps.  
 This name will use the URL of the GitHub Pages.
 
 ### `git clone` your new repository
@@ -39,7 +39,7 @@ You MUST edit `REGION` and `TILES_URL` value in `.env` file.
 NOTE: **GitHub Pages has 1GB size limits.**  
 So you MUST NOT choose very large `REGION`.
 
-You can ignore `PORT` value when you deploy vector tile maps to GitHub Pages.
+You can ignore `PORT` value when you deploy vector tile maps to GitHub Pages.  
 The `PORT` value will only use when launch local vector tile server.
 
 ### Just run `make`
@@ -54,7 +54,10 @@ make
 
 ```
 make gh-pages
-git push
 ```
+
+Don't forget: You MUST change settings your repository about GitHub Pages.
+
+[![Image from Gyazo](https://i.gyazo.com/6632ad1298122502b18cfc4d151b330a.png)](https://gyazo.com/6632ad1298122502b18cfc4d151b330a)
 
 ### See GitHub Pages
