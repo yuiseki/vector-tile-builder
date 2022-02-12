@@ -1,4 +1,4 @@
-include .env.local
+include .env
 
 pbf = tmp/$(REGION)-latest.osm.pbf
 mbtiles = tmp/region.mbtiles
@@ -32,7 +32,7 @@ start:
 		--mount type=bind,source=$(CURDIR)/docs,target=/app/docs \
 		vector-tile-builder \
 			http-server \
-				-p 80 \
+				-p $(PORT) \
 				docs
 
 # Download OpenStreetMap data as Protocolbuffer Binary format file

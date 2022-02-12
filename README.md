@@ -2,28 +2,46 @@
 
 ## Requirements
 
+- git
 - GNU make
 - curl
 - Docker
 
-## Usage
+## Create vector tile maps on GitHub Pages
+
+### Click `Use this template` button of this repository
+
+Decide name of your new maps repository.
+
+### `git clone` your repository
+
+### Copy and edit `.env`
+
+```
+cp .env.sample .env
+```
 
 You must edit `REGION` and `TILES_URL` value in `.env` file.
 
-`REGION` is some string like the path of https://download.geofabrik.de/
+`REGION` is some string of the path of https://download.geofabrik.de/
+`TILES_URL` is determine by your GitHub Pages settings.
+
+Note that: GitHub Pages has 1GB size limits.
+So you do not choose large `REGION`.
+
+You can ignore `PORT` value when you deploy vector tile maps to GitHub Pages.
+
+### Run `make clean` and `make`
+
+Require `make clean` to remove sample vector tiles on `./docs`
 
 ```
-cp .env.sapmle .env
-```
-
-Run `make`
-
-```
+make clean
 make
 ```
 
-## Launch as local area network vector tile maps server
+### Commit and Push changes
 
-Set `TILES_URL` like as `http://hostname/zxy/`
-Run `make`
-Run `make start`
+Wait Deploy of GitHub Pages...
+
+### See GitHub Pages
