@@ -4,3 +4,7 @@
 /tmp/**
 !/tmp/.gitkeep
 
+/docs/**
+!/docs/.gitkeep
+!/docs/index.html
+!/docs/style.json
