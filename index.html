@@ -25,12 +25,26 @@
   <body>
     <div id="map"></div>
     <script>
-      var map = new maplibregl.Map({
-        container: "map",
-        style: "./style.json",
-        center: [139.7673068, 35.6809591],
-        zoom: 10,
-      });
+      (async () => {
+        let map;
+        const res = await fetch("./tiles.json");
+        const tilejson = await res.json();
+        map = new maplibregl.Map({
+          container: "map",
+          style: "./style.json",
+          center: tilejson.center.slice(0, 2),
+          zoom: tilejson.center[2],
+        });
+        map.addControl(new maplibregl.NavigationControl());
+        map.addControl(
+          new maplibregl.AttributionControl({
+            compact: false,
+            customAttribution:
+              "Style © <a href='http://openmaptiles.org/'>OpenMapTiles</a> | " +
+              "Data © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
+          })
+        );
+      })();
     </script>
   </body>
 </html>
