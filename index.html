@@ -29,11 +29,17 @@
         let map;
         const res = await fetch("./tiles.json");
         const tilejson = await res.json();
+        const bounds = tilejson.bounds;
+        const center = tilejson.center
+          ? tilejson.center
+          : [(bounds[0] + bounds[2]) / 2, (bounds[1] + bounds[3]) / 2];
+        const zoom = (tilejson.minzoom + tilejson.maxzoom) / 2;
+        console.log(center, zoom);
         map = new maplibregl.Map({
           container: "map",
           style: "./style.json",
-          center: tilejson.center.slice(0, 2),
-          zoom: tilejson.center[2],
+          center: center,
+          zoom: 5,
         });
         map.addControl(new maplibregl.NavigationControl());
         map.addControl(
