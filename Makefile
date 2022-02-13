@@ -17,8 +17,15 @@ targets = \
 all: $(targets)
 
 clean:
+	sudo rm -rf tmp/zxy/*
+	sudo rm -f tmp/region.mbtiles
+	rm -rf docs/zxy/*
+	rm -f docs/style.json
+	rm -f docs/tiles.json
+
+clean-all:
 	docker rmi $(docker images | grep 'vector-tile-builder')
-	rm -rf tmp/*
+	sudo rm -rf tmp/*
 	rm -rf docs/zxy/*
 	rm -f docs/tiles.json
 
@@ -103,6 +110,7 @@ start:
 		-it \
 		--rm \
 		--mount type=bind,source=$(CURDIR)/docs,target=/app/docs \
+		-p $(PORT):$(PORT) \
 		vector-tile-builder \
 			http-server \
 				-p $(PORT) \
