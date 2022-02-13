@@ -15,6 +15,8 @@ Why don't you believe GNU?
 
 ### Click `Use this template` button of this repository
 
+[![Image from Gyazo](https://i.gyazo.com/961462b0a684ae3fe8b862d67b9cc1d2.png)](https://gyazo.com/961462b0a684ae3fe8b862d67b9cc1d2)
+
 Decide the name of repository of your new maps.  
 This name will use the URL of the GitHub Pages.
 
