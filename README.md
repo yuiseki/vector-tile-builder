@@ -55,6 +55,7 @@ make
 ### Create `gh-pages` branch and Publish
 
 ```
+make init-gh-pages
 make gh-pages
 ```
 
