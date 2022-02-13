@@ -45,6 +45,7 @@ RUN apt-get update && apt-get install -y nodejs \
 
 RUN npm i -g mbtiles2tilejson
 RUN npm i -g http-server
+RUN npm i -g @unvt/charites
 
 WORKDIR /app
 

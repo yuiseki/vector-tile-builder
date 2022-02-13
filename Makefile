@@ -3,6 +3,7 @@ include .env
 pbf = tmp/$(REGION)-latest.osm.pbf
 mbtiles = tmp/region.mbtiles
 tilejson = docs/tiles.json
+stylejson = docs/style.json
 zxy_metadata = docs/zxy/metadata.json
 
 targets = \
@@ -10,7 +11,8 @@ targets = \
 	$(pbf) \
 	$(mbtiles) \
 	$(tilejson) \
-	$(zxy_metadata)
+	$(zxy_metadata) \
+	$(stylejson)
 
 all: $(targets)
 
@@ -23,7 +25,7 @@ clean:
 # Build the `vector-tile-builder` docker image if not exists, must important step of this Makefile
 .PHONY: docker-build
 docker-build:
-	docker image inspect vector-tile-builder || docker build . -t vector-tile-builder
+	docker image inspect vector-tile-builder > /dev/null || docker build . -t vector-tile-builder
 
 # Download OpenStreetMap data as Protocolbuffer Binary format file
 $(pbf):
@@ -74,6 +76,15 @@ $(zxy_metadata):
 				--output-to-directory=/tmp/zxy \
 				/$(mbtiles)
 	cp -r tmp/zxy docs/
+
+# Generate style.json from style.yml
+$(stylejson):
+	docker run \
+		-it \
+		--rm \
+		--mount type=bind,source=$(CURDIR)/,target=/app \
+		vector-tile-builder \
+			charites build style.yml docs/style.json
 
 # Publish ./docs to GitHub Pages, with ignoring .gitignore
 .PHONY: gh-pages
