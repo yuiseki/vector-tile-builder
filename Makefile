@@ -52,6 +52,7 @@ $(mbtiles):
 		vector-tile-builder \
 			tilemaker \
 				--threads 0 \
+				--skip-integrity \
 				--input /$(pbf) \
 				--output /$(mbtiles)
 
