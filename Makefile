@@ -1,6 +1,6 @@
 include .env
 
-pbf = tmp/$(REGION)-latest.osm.pbf
+pbf = tmp/osm/$(REGION)-latest.osm.pbf
 mbtiles = tmp/region.mbtiles
 tilejson = docs/tiles.json
 stylejson = docs/style.json
