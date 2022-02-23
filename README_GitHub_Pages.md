@@ -1,4 +1,9 @@
-# Build and Deploy OpenStreetMap vector tile maps on GitHub Pages
+# Build and Deploy OpenStreetMap vector tile maps on GitHub Actions and GitHub Pages
+
+## Example
+
+https://github.com/yuiseki/vector-tile-builder-test
+https://yuiseki.github.io/vector-tile-builder-test/
 
 ## Click `Use this template` button of this repository
 
@@ -7,46 +12,20 @@
 Decide the name of repository of your new maps.  
 This name will use the URL of the GitHub Pages.
 
-## `git clone` your new repository
+## Edit and commit `.env` on GitHub
 
-```
-git clone git@github.com:your-github-username/your-repo-name.git
-cd your-repo-name
-```
-
-## Copy and edit `.env`
-
-```
-cp .env.sample .env
-```
-
-You MUST edit `REGION` and `TILES_URL` value in `.env` file.
-
-`REGION` is some string like `asia/japan/kanto` that is the path of https://download.geofabrik.de/  
-`TILES_URL` is determine by your GitHub username and repository name.
+You MUST edit only `REGION`.
 
 NOTE: **GitHub Pages has 1GB size limits.**  
 So you MUST NOT choose very large `REGION`.
 
-You can ignore `PORT` value when you deploy vector tile maps to GitHub Pages.  
-The `PORT` value will only use when launch local vector tile server.
+You can ignore `TILES_URL` and `PORT` values when you deploy vector tile maps to GitHub Pages.  
+Those value will only use when launch local vector tile server.
 
-## Just run `make`
+## Update repository settings
 
-```
-make
-```
-
-...It will done everything you want, If you meets requirements and `.env` file has written correctly.
-
-## Create `gh-pages` branch and Publish
-
-```
-make init-gh-pages
-make gh-pages
-```
-
-Don't forget: You MUST change settings your repository about GitHub Pages.
+Don't forget: You MUST change settings of your repository about GitHub Pages.  
+Choose `gh-pages` branch and save.
 
 [![Image from Gyazo](https://i.gyazo.com/6632ad1298122502b18cfc4d151b330a.png)](https://gyazo.com/6632ad1298122502b18cfc4d151b330a)
 

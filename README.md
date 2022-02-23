@@ -51,7 +51,7 @@ This repos depends on the following softwares:
 
 ## Build and Deploy vector tile maps on...
 
-### GitHub Pages
+### GitHub Actions and GitHub Pages
 
 Read [README_GitHub_Pages.md](./README_GitHub_Pages.md)
 
