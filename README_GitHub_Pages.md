@@ -14,7 +14,8 @@ This name will use the URL of the GitHub Pages.
 
 ## Edit and commit `.env` on GitHub
 
-You MUST edit only `REGION`.
+You MUST edit only `REGION`.  
+When you commit changes to `main` branch, GitHub Actions will automatically runs with new `.env` value.
 
 NOTE: **GitHub Pages has 1GB size limits.**  
 So you MUST NOT choose very large `REGION`.
