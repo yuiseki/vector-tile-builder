@@ -14,7 +14,8 @@ jobs:
           fetch-depth: 1
       - name: make
         uses: docker://yuiseki/vector-tile-builder:latest
-        run: make
+        with:
+          args: "make"
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
