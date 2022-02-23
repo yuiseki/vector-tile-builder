@@ -112,17 +112,6 @@ start:
 				-p $(PORT) \
 				docs
 
-# Launch local charites server
-.PHONY: charites
-charites:
-	docker run \
-		-it \
-		--rm \
-		--mount type=bind,source=$(CURDIR)/,target=/app \
-		-p 8080:8080 \
-		yuiseki/vector-tile-builder \
-			charites serve style.yml
-
 # Initialize gh-pages branch
 .PHONY: init-gh-pages
 init-gh-pages:
