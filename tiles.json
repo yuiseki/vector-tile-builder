@@ -10,14 +10,14 @@
   "minzoom": 0,
   "maxzoom": 14,
   "bounds": [
-    134.045154,
-    18.625054,
-    155.605818,
-    37.15988
+    1.412368,
+    42.4276,
+    1.787481,
+    42.65717
   ],
   "center": [
-    144.825486,
-    27.892467,
+    1.599925,
+    42.542385,
     7
   ],
   "vector_layers": [
@@ -25,6 +25,7 @@
       "id": "place",
       "fields": {
         "class": "String",
+        "iso_a2": "String",
         "name:latin": "String",
         "rank": "Number"
       },
@@ -35,7 +36,6 @@
       "id": "boundary",
       "fields": {
         "admin_level": "Number",
-        "class": "String",
         "disputed": "Number"
       },
       "minzoom": 0,
@@ -55,7 +55,6 @@
     {
       "id": "housenumber",
       "fields": {
-        "class": "String",
         "housenumber": "String"
       },
       "minzoom": 14,
@@ -99,12 +98,8 @@
     {
       "id": "building",
       "fields": {
-        "class": "String",
-        "name:latin": "String",
-        "rank": "Number",
         "render_height": "Number",
-        "render_min_height": "Number",
-        "subclass": "String"
+        "render_min_height": "Number"
       },
       "minzoom": 13,
       "maxzoom": 14
@@ -138,14 +133,7 @@
     },
     {
       "id": "aerodrome_label",
-      "fields": {
-        "class": "String",
-        "ele": "Number",
-        "ele_ft": "Number",
-        "iata": "String",
-        "icao": "String",
-        "name:latin": "String"
-      },
+      "fields": {},
       "minzoom": 10,
       "maxzoom": 14
     },
