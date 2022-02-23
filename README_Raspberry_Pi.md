@@ -16,7 +16,7 @@
 
 ## Setup Docker
 
-```
+```bash
 # Install Docker
 sudo curl -fsSL https://get.docker.com | sudo bash
 # add yourself to docker group
@@ -34,7 +34,7 @@ If `docker ps` still shows error, try to restart Raspberry Pi.
 
 ## Get this repos
 
-```
+```bash
 # Install git
 sudo apt install git -y
 git clone -b main --depth 1 https://github.com/yuiseki/vector-tile-builder.git
@@ -43,13 +43,14 @@ cd vector-tile-builder
 
 ## Copy `.env.local` to `.env`
 
-```
+```bash
 cp .env.local .env
 ```
 
-`.env.local` has written for Raspberry Pi.
+`.env.local` has written for Raspberry Pi.  
+I recommend that in first time to make, you may leave `region` value.
 
-## Just run `make`
+## Try to run `make`
 
 ```
 make

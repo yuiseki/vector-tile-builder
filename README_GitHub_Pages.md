@@ -5,6 +5,13 @@
 - https://github.com/yuiseki/vector-tile-builder-test
   - https://yuiseki.github.io/vector-tile-builder-test/
 
+## Steps
+
+- Click `Use this template`
+- Decide name of your maps
+- Edit `.env`
+- Update GitHub Page settings of repository
+
 ## Click `Use this template` button of this repository
 
 [![Image from Gyazo](https://i.gyazo.com/961462b0a684ae3fe8b862d67b9cc1d2.png)](https://gyazo.com/961462b0a684ae3fe8b862d67b9cc1d2)
@@ -14,7 +21,7 @@ This name will use the URL of the GitHub Pages.
 
 ## Edit and commit `.env` on GitHub
 
-You MUST edit only `REGION`.  
+You MUST edit ONLY `REGION`.  
 When you commit changes to `main` branch, GitHub Actions will automatically runs with new `.env` value.
 
 NOTE: **GitHub Pages has 1GB size limits.**  
