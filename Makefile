@@ -29,12 +29,12 @@ clean-all:
 	rm -rf docs/zxy/*
 	rm -f docs/tiles.json
 
-# Pull docker image
+# Pull `yuiseki/vector-tile-builder` docker image if not exists
 .PHONY: docker-pull
 docker-pull:
-	docker pull yuiseki/vector-tile-builder
+	docker image inspect yuiseki/vector-tile-builder > /dev/null || docker pull yuiseki/vector-tile-builder
 
-# Build the `vector-tile-builder` docker image if not exists
+# Build `yuiseki/vector-tile-builder` docker image if not exists
 .PHONY: docker-build
 docker-build:
 	docker image inspect yuiseki/vector-tile-builder > /dev/null || docker build . -t yuiseki/vector-tile-builder

@@ -49,7 +49,7 @@ This repos depends on the following softwares:
 - /tmp
   - Temporary directory to leave the intermediate products behind
 
-## Build and Deploy vector tile maps to...
+## Build and Deploy vector tile maps on...
 
 ### GitHub Pages
 
