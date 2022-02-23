@@ -37,8 +37,8 @@ RUN curl -Ls https://deb.nodesource.com/setup_16.x | bash
 RUN apt-get update && apt-get install -y nodejs \
       && rm -rf /var/lib/apt/lists/*
 
-RUN npm i -g mbtiles2tilejson
 RUN npm i -g http-server
+RUN npm i -g mbtiles2tilejson
 RUN npm i -g @unvt/charites
 
 RUN git clone --depth 1 https://github.com/systemed/tilemaker &&\

@@ -124,3 +124,30 @@ start:
 			http-server \
 				-p $(PORT) \
 				docs
+
+# Configure Raspberry Pi as Wi-Fi AP
+# need to call with sudo
+# `sudo make build-wifi-ap`
+.PHONY: build-wifi-ap
+build-wifi-ap:
+	@echo -n "Are you sure? [y/N] " && read ans && [ $${ans:-N} = y ]
+	@echo "Starting to configure Wi-Fi AP..."
+	cat /etc/rpi-issue
+	apt update
+	apt upgrade -y
+	DEBIAN_FRONTEND=noninteractive \
+		apt install -y \
+			hostapd \
+			dnsmasq \
+			netfilter-persistent \
+			iptables-persistent
+	systemctl unmask hostapd
+	systemctl enable hostapd
+	cp conf/etc/dhcpcd.conf /etc/dhcpcd.conf
+	cp conf/etc/dnsmasq.conf /etc/dnsmasq.conf
+	cp conf/etc/hostapd/hostapd.conf /etc/hostapd/hostapd.conf
+	cp conf/etc/sysctl.d/routed-ap.conf /etc/sysctl.d/routed-ap.conf
+	iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+	netfilter-persistent save
+	rfkill unblock wlan
+	systemctl reboot

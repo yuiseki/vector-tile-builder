@@ -1,5 +1,9 @@
 # vector-tile-builder
 
+## What is this
+
+This repos allows you to build, customize and deploy your own vector tile maps from the data of OpenStreetMap.
+
 ## Requirements
 
 - git
@@ -11,56 +15,46 @@
 I believe GNU, So I don't care about other `sed` or `make`.  
 Why don't you believe GNU?
 
-## Build your own free vector tile web maps on GitHub Pages
+## How it works
 
-### Click `Use this template` button of this repository
+This repos depends on the following softwares:
 
-[![Image from Gyazo](https://i.gyazo.com/961462b0a684ae3fe8b862d67b9cc1d2.png)](https://gyazo.com/961462b0a684ae3fe8b862d67b9cc1d2)
+- tilemaker
+  - https://github.com/systemed/tilemaker
+  - Most important software
+  - Make MBTiles file that following OpenMapTiles scheme from the data of OpenStreetMap
+- tippecanoe
+  - https://github.com/mapbox/tippecanoe
+  - Also important software
+  - Split MBTiles file into zxy style directory and PBF files
+- Node.js
+  - http-server
+    - https://github.com/http-party/http-server
+    - Simple, configure less http server
+  - mbtiles2tilejson
+    - https://github.com/yuiseki/mbtiles2tilejson
+    - Make TileJSON file from MBTiles file
+  - @unvt/charites
+    - https://github.com/unvt/charites
+    - Make JSON file that following Mapbox Style Specification from split yml files.
 
-Decide the name of repository of your new maps.  
-This name will use the URL of the GitHub Pages.
+## Structure
 
-### `git clone` your new repository
+- /conf
+  - Configure files for Raspberry Pi
+- /docs
+  - Final product of this repos
+- /layers
+  - Style definition files to customize appearance of maps
+- /tmp
+  - Temporary directory to leave the intermediate products behind
 
-```
-git clone git@github.com:your-github-username/your-repo-name.git
-cd your-repo-name
-```
+## Build and Deploy vector tile maps to...
 
-### Copy and edit `.env`
+### GitHub Pages
 
-```
-cp .env.sample .env
-```
+Read [README_GitHub_Pages.md](./README_GitHub_Pages.md)
 
-You MUST edit `REGION` and `TILES_URL` value in `.env` file.
+### Raspberry Pi
 
-`REGION` is some string like `asia/japan/kanto` that is the path of https://download.geofabrik.de/  
-`TILES_URL` is determine by your GitHub username and repository name.
-
-NOTE: **GitHub Pages has 1GB size limits.**  
-So you MUST NOT choose very large `REGION`.
-
-You can ignore `PORT` value when you deploy vector tile maps to GitHub Pages.  
-The `PORT` value will only use when launch local vector tile server.
-
-### Just run `make`
-
-```
-make
-```
-
-...It will done everything you want, If you meets requirements and `.env` file has written correctly.
-
-### Create `gh-pages` branch and Publish
-
-```
-make init-gh-pages
-make gh-pages
-```
-
-Don't forget: You MUST change settings your repository about GitHub Pages.
-
-[![Image from Gyazo](https://i.gyazo.com/6632ad1298122502b18cfc4d151b330a.png)](https://gyazo.com/6632ad1298122502b18cfc4d151b330a)
-
-### See GitHub Pages
+Read [README_Raspberry_Pi.md](./README_Raspberry_Pi.md)
