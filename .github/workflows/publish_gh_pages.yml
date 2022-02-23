@@ -1,0 +1,22 @@
+name: Publish GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish_gh_pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: make
+        uses: docker://yuiseki/vector-tile-builder:latest
+        run: make
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
