@@ -1,6 +1,4 @@
 .env
+Makefile
 docs/**
 tmp/**
-Makefile
-README.md
-LICENSE
