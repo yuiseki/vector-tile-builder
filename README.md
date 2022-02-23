@@ -4,17 +4,6 @@
 
 This repos allows you to build, customize and deploy your own vector tile maps from the data of OpenStreetMap.
 
-## Requirements
-
-- git
-- curl
-- GNU sed
-- GNU make
-- Docker
-
-I believe GNU, So I don't care about other `sed` or `make`.  
-Why don't you believe GNU?
-
 ## How it works
 
 This repos depends on the following softwares:
@@ -58,3 +47,16 @@ Read [README_GitHub_Pages.md](./README_GitHub_Pages.md)
 ### Raspberry Pi
 
 Read [README_Raspberry_Pi.md](./README_Raspberry_Pi.md)
+
+## Development
+
+### Requirements
+
+- git
+- curl
+- GNU sed
+- GNU make
+- Docker
+
+I believe GNU, So I don't care about other `sed` or `make`.  
+Why don't you believe GNU?
