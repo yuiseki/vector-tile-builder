@@ -51,7 +51,7 @@ $(pbf):
 $(mbtiles):
 	mkdir -p $(@D)
 	docker run \
-		-it \
+		-i \
 		--rm \
 		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
 		yuiseki/vector-tile-builder \
@@ -65,7 +65,7 @@ $(mbtiles):
 $(tilejson):
 	mkdir -p $(@D)
 	docker run \
-		-it \
+		-i \
 		--rm \
 		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
 		yuiseki/vector-tile-builder \
@@ -77,7 +77,7 @@ $(tilejson):
 $(zxy_metadata):
 	mkdir -p $(@D)
 	docker run \
-		-it \
+		-i \
 		--rm \
 		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
 		yuiseki/vector-tile-builder \
@@ -93,7 +93,7 @@ $(zxy_metadata):
 # Generate style.json from style.yml
 $(stylejson):
 	docker run \
-		-it \
+		-i \
 		--rm \
 		--mount type=bind,source=$(CURDIR)/,target=/app \
 		yuiseki/vector-tile-builder \
