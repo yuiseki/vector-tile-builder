@@ -7,7 +7,7 @@ stylejson = docs/style.json
 zxy_metadata = docs/zxy/metadata.json
 
 targets = \
-	docker-build \
+	docker-pull \
 	$(pbf) \
 	$(mbtiles) \
 	$(tilejson) \
@@ -29,10 +29,15 @@ clean-all:
 	rm -rf docs/zxy/*
 	rm -f docs/tiles.json
 
-# Build the `vector-tile-builder` docker image if not exists, must important step of this Makefile
+# Pull docker image
+.PHONY: docker-pull
+docker-pull:
+	docker pull yuiseki/vector-tile-builder
+
+# Build the `vector-tile-builder` docker image if not exists
 .PHONY: docker-build
 docker-build:
-	docker image inspect vector-tile-builder > /dev/null || docker build . -t vector-tile-builder
+	docker image inspect yuiseki/vector-tile-builder > /dev/null || docker build . -t yuiseki/vector-tile-builder
 
 # Download OpenStreetMap data as Protocolbuffer Binary format file
 $(pbf):
@@ -49,7 +54,7 @@ $(mbtiles):
 		-it \
 		--rm \
 		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
-		vector-tile-builder \
+		yuiseki/vector-tile-builder \
 			tilemaker \
 				--threads 0 \
 				--skip-integrity \
@@ -63,7 +68,7 @@ $(tilejson):
 		-it \
 		--rm \
 		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
-		vector-tile-builder \
+		yuiseki/vector-tile-builder \
 			mbtiles2tilejson \
 				/tmp/region.mbtiles \
 				--url $(TILES_URL) > docs/tiles.json
@@ -75,7 +80,7 @@ $(zxy_metadata):
 		-it \
 		--rm \
 		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
-		vector-tile-builder \
+		yuiseki/vector-tile-builder \
 			tile-join \
 				--force \
 				--no-tile-compression \
@@ -91,7 +96,7 @@ $(stylejson):
 		-it \
 		--rm \
 		--mount type=bind,source=$(CURDIR)/,target=/app \
-		vector-tile-builder \
+		yuiseki/vector-tile-builder \
 			charites build style.yml docs/style.json
 
 # Initialize gh-pages branch
@@ -120,7 +125,7 @@ start:
 		--rm \
 		--mount type=bind,source=$(CURDIR)/docs,target=/app/docs \
 		-p $(PORT):$(PORT) \
-		vector-tile-builder \
+		yuiseki/vector-tile-builder \
 			http-server \
 				-p $(PORT) \
 				docs
