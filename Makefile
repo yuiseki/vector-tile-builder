@@ -99,6 +99,30 @@ $(stylejson):
 		yuiseki/vector-tile-builder \
 			charites build style.yml docs/style.json
 
+# Launch local tile server
+.PHONY: start
+start:
+	docker run \
+		-it \
+		--rm \
+		--mount type=bind,source=$(CURDIR)/docs,target=/app/docs \
+		-p $(PORT):$(PORT) \
+		yuiseki/vector-tile-builder \
+			http-server \
+				-p $(PORT) \
+				docs
+
+# Launch local charites server
+.PHONY: charites
+charites:
+	docker run \
+		-it \
+		--rm \
+		--mount type=bind,source=$(CURDIR)/,target=/app \
+		-p 8080:8080 \
+		yuiseki/vector-tile-builder \
+			charites serve style.yml
+
 # Initialize gh-pages branch
 .PHONY: init-gh-pages
 init-gh-pages:
@@ -116,19 +140,6 @@ gh-pages:
 	git push origin `git subtree split --prefix docs main`:gh-pages --force
 	git reset HEAD~
 	git checkout .gitignore
-
-# Launch local server
-.PHONY: start
-start:
-	docker run \
-		-it \
-		--rm \
-		--mount type=bind,source=$(CURDIR)/docs,target=/app/docs \
-		-p $(PORT):$(PORT) \
-		yuiseki/vector-tile-builder \
-			http-server \
-				-p $(PORT) \
-				docs
 
 # Configure Raspberry Pi as Wi-Fi AP
 # need to call with sudo

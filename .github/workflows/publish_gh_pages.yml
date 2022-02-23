@@ -18,7 +18,7 @@ jobs:
         run: |
           USER_NAME=$(echo $GITHUB_REPOSITORY | awk -F/ '{print $1}')
           REPO_NAME=$(echo $GITHUB_REPOSITORY | awk -F/ '{print $2}')
-          sed "s|http://localhost:8080/zxy|https://$USER_NAME.github.io/$REPO_NAME/zxy|g" -i docs/tiles.json
+          sed "s|http://localhost:5000/zxy|https://$USER_NAME.github.io/$REPO_NAME/zxy|g" -i docs/tiles.json
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
