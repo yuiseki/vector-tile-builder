@@ -2,8 +2,8 @@
 
 ## Example
 
-https://github.com/yuiseki/vector-tile-builder-test
-https://yuiseki.github.io/vector-tile-builder-test/
+- https://github.com/yuiseki/vector-tile-builder-test
+  - https://yuiseki.github.io/vector-tile-builder-test/
 
 ## Click `Use this template` button of this repository
 
