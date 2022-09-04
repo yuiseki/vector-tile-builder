@@ -29,7 +29,8 @@ RUN apt-get update && \
   libprotobuf-dev \
   libshp-dev \
   protobuf-compiler \
-  rapidjson-dev
+  rapidjson-dev \
+  libgeos-dev libgeos++-dev libproj-dev gdal-bin libmapnik-dev mapnik-utils python3-mapnik python3-psycopg2
 
 WORKDIR /app
 
