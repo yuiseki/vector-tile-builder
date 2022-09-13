@@ -1,0 +1,34 @@
+{
+  "name": "Ubuntu 22.04 Node.js v16",
+  "context": "../",
+  "dockerFile": "./Dockerfile",
+  "forwardPorts": [3000, 5000],
+  "remoteUser": "user",
+  "runArgs": ["--init"],
+  "overrideCommand": false,
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash"
+          }
+        },
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "files.autoSave": "afterDelay",
+        "files.autoSaveDelay": 1000,
+        "editor.formatOnSave": true
+      },
+      "extensions": [
+        "ms-azuretools.vscode-docker",
+        "wraith13.bracket-lens",
+        "vscode-icons-team.vscode-icons",
+        "oderwat.indent-rainbow",
+        "mosapride.zenkaku",
+        "VisualStudioExptTeam.vscodeintellicode",
+        "ms-vsliveshare.vsliveshare",
+        "nickdemayo.vscode-json-editor"
+      ]
+    }
+  }
+}
