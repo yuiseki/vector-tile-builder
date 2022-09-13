@@ -8,6 +8,7 @@ RUN apt-get update && \
   sudo \
   curl \
   git \
+  vim \
   jq \
   osmium-tool \
   build-essential \
@@ -52,4 +53,7 @@ RUN git clone --depth 1 https://github.com/mapbox/tippecanoe &&\
   cd tippecanoe; make -j$(nproc) LDFLAGS="-latomic"; make install; cd .. &&\
   rm -rf tippecanoe
 
-CMD ["/bin/bash"]
+RUN useradd -m user
+USER user
+
+CMD [ "sleep", "infinity" ]
