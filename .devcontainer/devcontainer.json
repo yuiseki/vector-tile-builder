@@ -1,5 +1,5 @@
 {
-  "name": "Ubuntu 22.04 Node.js v16",
+  "name": "Ubuntu 22.04 Node.js v18",
   "context": "../",
   "dockerFile": "../Dockerfile",
   "forwardPorts": [3000, 5000],

@@ -10,6 +10,7 @@ RUN apt-get update && \
   git \
   vim \
   jq \
+  sqlite3 \
   osmium-tool \
   build-essential \
   gcc \
@@ -35,7 +36,7 @@ RUN apt-get update && \
 
 WORKDIR /app
 
-RUN curl -Ls https://deb.nodesource.com/setup_16.x | bash
+RUN curl -Ls https://deb.nodesource.com/setup_18.x | bash
 RUN apt-get update && apt-get install -y nodejs \
       && rm -rf /var/lib/apt/lists/*
 
