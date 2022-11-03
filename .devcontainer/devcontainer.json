@@ -1,7 +1,7 @@
 {
   "name": "Ubuntu 22.04 Node.js v18",
   "context": "../",
-  "dockerFile": "../Dockerfile",
+  "dockerFile": "./Dockerfile",
   "forwardPorts": [3000, 5000],
   "remoteUser": "user",
   "runArgs": ["--init"],
