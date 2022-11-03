@@ -7,7 +7,7 @@ stylejson = docs/style.json
 zxy_metadata = docs/zxy/metadata.json
 
 targets = \
-	docker-pull \
+	docker-build \
 	$(pbf) \
 	$(mbtiles) \
 	$(tilejson) \
@@ -56,7 +56,7 @@ $(mbtiles):
 		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
 		yuiseki/vector-tile-builder \
 			tilemaker \
-				--threads 0 \
+				--threads 3 \
 				--skip-integrity \
 				--input /$(pbf) \
 				--output /$(mbtiles)

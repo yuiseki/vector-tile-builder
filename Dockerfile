@@ -39,16 +39,17 @@ RUN apt-get update && apt-get install -y nodejs \
 
 RUN npm i -g http-server
 RUN npm i -g mbtiles2tilejson
-RUN npm i -g @unvt/charites
+RUN git clone --depth -1 https://github.com/unvt/charites &&\
+  cd charites; npm ci; npm run build; npm install -g .
 
 RUN git clone --depth 1 https://github.com/systemed/tilemaker &&\
-  cd tilemaker; make -j$(nproc) LDFLAGS="-latomic"; make install; cd .. &&\
+  cd tilemaker; make -j3 LDFLAGS="-latomic"; make install; cd .. &&\
   cp tilemaker/resources/config-openmaptiles.json ./config.json &&\
   cp tilemaker/resources/process-openmaptiles.lua ./process.lua &&\
   rm -rf tilemaker
 
 RUN git clone --depth 1 https://github.com/mapbox/tippecanoe &&\
-  cd tippecanoe; make -j$(nproc) LDFLAGS="-latomic"; make install; cd .. &&\
+  cd tippecanoe; make -j3 LDFLAGS="-latomic"; make install; cd .. &&\
   rm -rf tippecanoe
 
 CMD ["/bin/bash"]
