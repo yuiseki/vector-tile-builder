@@ -39,6 +39,12 @@ docker-pull:
 docker-build:
 	docker image inspect yuiseki/vector-tile-builder > /dev/null || docker build . -t yuiseki/vector-tile-builder
 
+# Push `yuiseki/vector-tile-builder` docker image to docker hub
+# MEMO: require `docker login`
+.PHONY: docker-push
+docker-push:
+	docker push yuiseki/vector-tile-builder:latest
+
 # Download OpenStreetMap data as Protocolbuffer Binary format file
 $(pbf):
 	mkdir -p $(@D)
