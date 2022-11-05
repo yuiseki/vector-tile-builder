@@ -11,7 +11,11 @@ targets = \
 	$(mbtiles) \
 	$(tilejson) \
 	$(zxy_metadata) \
-	$(stylejson)
+	$(stylejson) \
+	docs/openmaptiles/fonts/Open\ Sans\ Bold/0-255.pbf
+	docs/openmaptiles/fonts/Open\ Sans\ Italic/0-255.pbf
+	docs/openmaptiles/fonts/Open\ Sans\ Regular/0-255.pbf
+
 
 all: $(targets)
 
@@ -111,7 +115,7 @@ docs/openmaptiles/fonts/Open\ Sans\ Bold/0-255.pbf:
 docs/openmaptiles/fonts/Open\ Sans\ Italic/0-255.pbf:
 	unzip 'docs/openmaptiles/fonts/Open\ Sans\ Italic.zip'
 
-docs/openmaptiles/fonts/Open Sans Regular/0-255.pbf:
+docs/openmaptiles/fonts/Open\ Sans\ Regular/0-255.pbf:
 	unzip 'docs/openmaptiles/fonts/Open\ Sans\ Regular.zip'
 
 # Launch local tile server
