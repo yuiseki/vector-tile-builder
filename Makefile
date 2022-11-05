@@ -20,11 +20,15 @@ targets = \
 all: $(targets)
 
 clean:
-	sudo rm -rf tmp/zxy/*
-	sudo rm -f tmp/region.mbtiles
+	sudo chmod 777 -R tmp
+	rm -rf tmp/zxy/*
+	rm -f tmp/region.mbtiles
 	rm -rf docs/zxy/*
 	rm -f docs/style.json
 	rm -f docs/tiles.json
+	rm -rf docs/openmaptiles/fonts/Open\ Sans\ Bold
+	rm -rf docs/openmaptiles/fonts/Open\ Sans\ Italic
+	rm -rf docs/openmaptiles/fonts/Open\ Sans\ Regular
 
 clean-all:
 	rm -rf tmp/*
@@ -110,13 +114,13 @@ $(stylejson):
 			charites build style.yml docs/style.json
 
 docs/openmaptiles/fonts/Open\ Sans\ Bold/0-255.pbf:
-	unzip 'docs/openmaptiles/fonts/Open\ Sans\ Bold.zip'
+	cd docs/openmaptiles/fonts && unzip Open\ Sans\ Bold.zip
 
 docs/openmaptiles/fonts/Open\ Sans\ Italic/0-255.pbf:
-	unzip 'docs/openmaptiles/fonts/Open\ Sans\ Italic.zip'
+	cd docs/openmaptiles/fonts && unzip Open\ Sans\ Italic.zip
 
 docs/openmaptiles/fonts/Open\ Sans\ Regular/0-255.pbf:
-	unzip 'docs/openmaptiles/fonts/Open\ Sans\ Regular.zip'
+	cd docs/openmaptiles/fonts && unzip Open\ Sans\ Regular.zip
 
 # Launch local tile server
 .PHONY: start
