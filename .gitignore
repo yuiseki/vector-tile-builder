@@ -6,3 +6,5 @@
 !/docs/.gitkeep
 !/docs/.nojekyll
 !/docs/index.html
+!/openmaptiles/fonts/*.zip
+!/openmaptiles/osm-bright-gl-style/*
