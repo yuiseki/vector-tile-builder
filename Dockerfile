@@ -33,7 +33,7 @@ RUN apt-get update && \
   protobuf-compiler \
   rapidjson-dev
 
-WORKDIR /tmp
+WORKDIR /app
 
 RUN git clone --depth 1 https://github.com/systemed/tilemaker &&\
   cd tilemaker; make -j3 LDFLAGS="-latomic"; make install; cd .. &&\
@@ -48,6 +48,8 @@ RUN git clone --depth 1 https://github.com/mapbox/tippecanoe &&\
 RUN curl -Ls https://deb.nodesource.com/setup_18.x | bash
 RUN apt-get update && apt-get install -y nodejs \
       && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /tmp
 
 RUN npm i -g http-server
 RUN npm i -g mbtiles2tilejson
