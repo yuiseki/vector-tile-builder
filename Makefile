@@ -7,7 +7,6 @@ stylejson = docs/style.json
 zxy_metadata = docs/zxy/metadata.json
 
 targets = \
-	docker-build \
 	$(pbf) \
 	$(mbtiles) \
 	$(tilejson) \

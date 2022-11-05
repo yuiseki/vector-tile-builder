@@ -13,7 +13,7 @@ jobs:
         with:
           fetch-depth: 1
       - name: make
-        run: make
+        run: make docker-pull && make
       - name: Fix tiles.json
         run: |
           USER_NAME=$(echo $GITHUB_REPOSITORY | awk -F/ '{print $1}')
