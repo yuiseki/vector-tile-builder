@@ -23,10 +23,11 @@ clean:
 	rm -f docs/tiles.json
 
 clean-all:
-	docker rmi $(docker images | grep 'vector-tile-builder')
-	sudo rm -rf tmp/*
+	rm -rf tmp/*
 	rm -rf docs/zxy/*
 	rm -f docs/tiles.json
+	rm -f docs/style.json
+	docker rmi $(docker images | grep 'vector-tile-builder')
 
 # Pull `yuiseki/vector-tile-builder` docker image if not exists
 .PHONY: docker-pull

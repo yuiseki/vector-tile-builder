@@ -32,7 +32,8 @@ RUN apt-get update && \
   libshp-dev \
   protobuf-compiler \
   rapidjson-dev
-WORKDIR /app
+
+WORKDIR /tmp
 
 RUN git clone --depth 1 https://github.com/systemed/tilemaker &&\
   cd tilemaker; make -j3 LDFLAGS="-latomic"; make install; cd .. &&\
@@ -52,5 +53,7 @@ RUN npm i -g http-server
 RUN npm i -g mbtiles2tilejson
 RUN git clone --depth 1 https://github.com/unvt/charites &&\
   cd charites; npm ci; npm run build; npm install -g .
+
+WORKDIR /app
 
 CMD ["/bin/bash"]
