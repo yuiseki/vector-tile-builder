@@ -34,15 +34,6 @@ RUN apt-get update && \
   rapidjson-dev
 WORKDIR /app
 
-RUN curl -Ls https://deb.nodesource.com/setup_18.x | bash
-RUN apt-get update && apt-get install -y nodejs \
-      && rm -rf /var/lib/apt/lists/*
-
-RUN npm i -g http-server
-RUN npm i -g mbtiles2tilejson
-RUN git clone --depth -1 https://github.com/unvt/charites &&\
-  cd charites; npm ci; npm run build; npm install -g .
-
 RUN git clone --depth 1 https://github.com/systemed/tilemaker &&\
   cd tilemaker; make -j3 LDFLAGS="-latomic"; make install; cd .. &&\
   cp tilemaker/resources/config-openmaptiles.json ./config.json &&\
@@ -50,7 +41,16 @@ RUN git clone --depth 1 https://github.com/systemed/tilemaker &&\
   rm -rf tilemaker
 
 RUN git clone --depth 1 https://github.com/mapbox/tippecanoe &&\
-  cd tippecanoe; make -j3 LDFLAGS="-latomic"; make install; cd .. &&\
-  rm -rf tippecanoe
+  cd tippecanoe; make -j3 LDFLAGS="-latomic"; make install &&\
+  cd ..; rm -rf tippecanoe
+
+RUN curl -Ls https://deb.nodesource.com/setup_18.x | bash
+RUN apt-get update && apt-get install -y nodejs \
+      && rm -rf /var/lib/apt/lists/*
+
+RUN npm i -g http-server
+RUN npm i -g mbtiles2tilejson
+RUN git clone --depth 1 https://github.com/unvt/charites &&\
+  cd charites; npm ci; npm run build; npm install -g .
 
 CMD ["/bin/bash"]

@@ -99,6 +99,15 @@ $(stylejson):
 		yuiseki/vector-tile-builder \
 			charites build style.yml docs/style.json
 
+docs/openmaptiles/fonts/Open\ Sans\ Bold/0-255.pbf:
+	unzip 'docs/openmaptiles/fonts/Open\ Sans\ Bold.zip'
+
+docs/openmaptiles/fonts/Open\ Sans\ Italic/0-255.pbf:
+	unzip 'docs/openmaptiles/fonts/Open\ Sans\ Italic.zip'
+
+docs/openmaptiles/fonts/Open Sans Regular/0-255.pbf:
+	unzip 'docs/openmaptiles/fonts/Open\ Sans\ Regular.zip'
+
 # Launch local tile server
 .PHONY: start
 start:

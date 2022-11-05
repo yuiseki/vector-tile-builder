@@ -6,5 +6,13 @@
 !/docs/.gitkeep
 !/docs/.nojekyll
 !/docs/index.html
-!/openmaptiles/fonts/*.zip
-!/openmaptiles/osm-bright-gl-style/*
+!/docs/maplibre-gl/
+!/docs/maplibre-gl/v1.15.2/
+!/docs/maplibre-gl/v1.15.2/maplibre-gl.css
+!/docs/maplibre-gl/v1.15.2/maplibre-gl.js
+!/docs/openmaptiles/
+!/docs/openmaptiles/fonts/
+!/docs/openmaptiles/fonts/*.zip
+!/docs/openmaptiles/osm-bright-gl-style/
+!/docs/openmaptiles/osm-bright-gl-style/*.json
+!/docs/openmaptiles/osm-bright-gl-style/*.png
