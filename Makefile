@@ -31,12 +31,12 @@ clean-all:
 # Pull `yuiseki/vector-tile-builder` docker image if not exists
 .PHONY: docker-pull
 docker-pull:
-	docker image inspect yuiseki/vector-tile-builder > /dev/null || docker pull yuiseki/vector-tile-builder
+	docker image inspect yuiseki/vector-tile-builder:latest > /dev/null || docker pull yuiseki/vector-tile-builder:latest
 
 # Build `yuiseki/vector-tile-builder` docker image if not exists
 .PHONY: docker-build
 docker-build:
-	docker image inspect yuiseki/vector-tile-builder > /dev/null || docker build . -t yuiseki/vector-tile-builder
+	docker image inspect yuiseki/vector-tile-builder:latest > /dev/null || docker build . -t yuiseki/vector-tile-builder:latest
 
 # Push `yuiseki/vector-tile-builder` docker image to docker hub
 # MEMO: require `docker login`
