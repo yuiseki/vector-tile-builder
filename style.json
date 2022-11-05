@@ -47,8 +47,8 @@
       "url": "./tiles.json"
     }
   },
-  "sprite": "https://openmaptiles.github.io/osm-bright-gl-style/sprite",
-  "glyphs": "https://fonts.openmaptiles.org/{fontstack}/{range}.pbf",
+  "sprite": "https://yuiseki.github.io/vector-tile-builder/openmaptiles/osm-bright-gl-style/sprite",
+  "glyphs": "https://yuiseki.github.io/vector-tile-builder/openmaptiles/fonts/{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "background",
