@@ -117,12 +117,15 @@ $(stylejson):
 
 docs/openmaptiles/fonts/Open\ Sans\ Bold/0-255.pbf:
 	cd docs/openmaptiles/fonts && unzip Open\ Sans\ Bold.zip
+	chmod 755 -R docs/openmaptiles/fonts
 
 docs/openmaptiles/fonts/Open\ Sans\ Italic/0-255.pbf:
 	cd docs/openmaptiles/fonts && unzip Open\ Sans\ Italic.zip
+	chmod 755 -R docs/openmaptiles/fonts
 
 docs/openmaptiles/fonts/Open\ Sans\ Regular/0-255.pbf:
 	cd docs/openmaptiles/fonts && unzip Open\ Sans\ Regular.zip
+	chmod 755 -R docs/openmaptiles/fonts
 
 # Launch local tile server
 .PHONY: start
