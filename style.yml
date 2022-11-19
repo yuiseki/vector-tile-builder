@@ -34,7 +34,7 @@ pitch: 0
 sources:
   openmaptiles:
     type: vector
-    url: ./tiles.json
+    url: http://localhost:5000/tiles.json
 sprite: http://localhost:5000/openmaptiles/osm-bright-gl-style/sprite
 glyphs: http://localhost:5000/openmaptiles/fonts/{fontstack}/{range}.pbf
 layers:
