@@ -86,6 +86,7 @@ $(tilejson):
 			mbtiles2tilejson \
 				/tmp/region.mbtiles \
 				--url $(TILES_URL) > docs/tiles.json
+	sed "s|http://localhost:5000/|$(BASE_PATH)|g" -i docs/tiles.json
 
 # Split MBTiles format file to zxy orderd Protocolbuffer Binary format files
 $(zxy_metadata):
@@ -112,15 +113,19 @@ $(stylejson):
 		--mount type=bind,source=$(CURDIR)/,target=/app \
 		yuiseki/vector-tile-builder \
 			charites build style.yml docs/style.json
+	sed "s|http://localhost:5000/|$(BASE_PATH)|g" -i docs/style.json
 
 docs/openmaptiles/fonts/Open\ Sans\ Bold/0-255.pbf:
 	cd docs/openmaptiles/fonts && unzip Open\ Sans\ Bold.zip
+	chmod 755 -R docs/openmaptiles/fonts
 
 docs/openmaptiles/fonts/Open\ Sans\ Italic/0-255.pbf:
 	cd docs/openmaptiles/fonts && unzip Open\ Sans\ Italic.zip
+	chmod 755 -R docs/openmaptiles/fonts
 
 docs/openmaptiles/fonts/Open\ Sans\ Regular/0-255.pbf:
 	cd docs/openmaptiles/fonts && unzip Open\ Sans\ Regular.zip
+	chmod 755 -R docs/openmaptiles/fonts
 
 # Launch local tile server
 .PHONY: start
