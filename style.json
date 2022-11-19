@@ -44,7 +44,7 @@
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "url": "./tiles.json"
+      "url": "https://yuiseki.github.io/vector-tile-builder/tiles.json"
     }
   },
   "sprite": "https://yuiseki.github.io/vector-tile-builder/openmaptiles/osm-bright-gl-style/sprite",
