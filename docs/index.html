@@ -5,8 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vector tile builder Demo</title>
+    <!-- maplibre-gl -->
     <script src="./maplibre-gl/v1.15.2/maplibre-gl.js"></script>
     <link href="./maplibre-gl/v1.15.2/maplibre-gl.css" rel="stylesheet" />
+    <!-- watergis/maplibre-gl-legend -->
+    <script src="./watergis/maplibre-gl-legend/v1.2.8/maplibre-gl-legend.js"></script>
+    <link
+      href="./watergis/maplibre-gl-legend/v1.2.8/maplibre-gl-legend.css"
+      rel="stylesheet"
+    />
     <style>
       html,
       body,
@@ -36,9 +43,10 @@
           container: "map",
           style: "./style.json",
           center: center,
-          zoom: 5,
+          zoom: zoom,
         });
-        map.addControl(new maplibregl.NavigationControl());
+
+        map.addControl(new maplibregl.NavigationControl(), "top-right");
         map.addControl(
           new maplibregl.AttributionControl({
             compact: false,
@@ -46,6 +54,18 @@
               "Style © <a href='http://openmaptiles.org/'>OpenMapTiles</a> | " +
               "Data © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
           })
+        );
+        map.addControl(
+          new MaplibreLegendControl(
+            {},
+            {
+              showDefault: true,
+              showCheckbox: true,
+              onlyRendered: true,
+              reverseOrder: true,
+            }
+          ),
+          "bottom-left"
         );
       })();
     </script>
