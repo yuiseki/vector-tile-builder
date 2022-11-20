@@ -16,3 +16,5 @@
 !/docs/openmaptiles/osm-bright-gl-style/
 !/docs/openmaptiles/osm-bright-gl-style/*.json
 !/docs/openmaptiles/osm-bright-gl-style/*.png
+!/docs/watergis/maplibre-gl-legend/v1.2.8/*.js
+!/docs/watergis/maplibre-gl-legend/v1.2.8/*.css
