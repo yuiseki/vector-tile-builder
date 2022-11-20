@@ -31,7 +31,8 @@ clean:
 	rm -rf docs/openmaptiles/fonts/Open\ Sans\ Regular
 
 clean-all:
-	rm -rf tmp/*
+	rm -rf tmp/zxy/*
+	rm -f tmp/region.mbtiles
 	rm -rf docs/zxy/*
 	rm -f docs/tiles.json
 	rm -f docs/style.json
