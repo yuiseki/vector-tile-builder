@@ -21,21 +21,19 @@ all: $(targets)
 
 clean:
 	sudo chmod 777 -R tmp
-	rm -rf tmp/zxy/*
-	rm -f tmp/region.mbtiles
 	rm -rf docs/zxy/*
 	rm -f docs/style.json
 	rm -f docs/tiles.json
+
+clean-all:
+	rm -f tmp/region.mbtiles
+	rm -rf tmp/zxy/*
+	rm -rf docs/zxy/*
+	rm -f docs/tiles.json
+	rm -f docs/style.json
 	rm -rf docs/openmaptiles/fonts/Open\ Sans\ Bold
 	rm -rf docs/openmaptiles/fonts/Open\ Sans\ Italic
 	rm -rf docs/openmaptiles/fonts/Open\ Sans\ Regular
-
-clean-all:
-	rm -rf tmp/zxy/*
-	rm -f tmp/region.mbtiles
-	rm -rf docs/zxy/*
-	rm -f docs/tiles.json
-	rm -f docs/style.json
 	docker rmi $(docker images | grep 'vector-tile-builder')
 
 # Pull `yuiseki/vector-tile-builder` docker image if not exists
@@ -118,15 +116,15 @@ $(stylejson):
 
 docs/openmaptiles/fonts/Open\ Sans\ Bold/0-255.pbf:
 	cd docs/openmaptiles/fonts && unzip Open\ Sans\ Bold.zip
-	chmod 755 -R docs/openmaptiles/fonts
+	chmod 777 -R docs/openmaptiles/fonts
 
 docs/openmaptiles/fonts/Open\ Sans\ Italic/0-255.pbf:
 	cd docs/openmaptiles/fonts && unzip Open\ Sans\ Italic.zip
-	chmod 755 -R docs/openmaptiles/fonts
+	chmod 777 -R docs/openmaptiles/fonts
 
 docs/openmaptiles/fonts/Open\ Sans\ Regular/0-255.pbf:
 	cd docs/openmaptiles/fonts && unzip Open\ Sans\ Regular.zip
-	chmod 755 -R docs/openmaptiles/fonts
+	chmod 777 -R docs/openmaptiles/fonts
 
 # Launch local tile server
 .PHONY: start
