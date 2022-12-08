@@ -44,6 +44,7 @@
           style: "./style.json",
           center: center,
           zoom: zoom,
+          hash: true,
         });
 
         map.addControl(new maplibregl.NavigationControl(), "top-right");
@@ -59,7 +60,7 @@
           new MaplibreLegendControl(
             {},
             {
-              showDefault: true,
+              showDefault: false,
               showCheckbox: true,
               onlyRendered: true,
               reverseOrder: true,

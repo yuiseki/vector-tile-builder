@@ -7,14 +7,14 @@ stylejson = docs/style.json
 zxy_metadata = docs/zxy/metadata.json
 
 targets = \
+	docs/openmaptiles/fonts/Open\ Sans\ Bold/0-255.pbf \
+	docs/openmaptiles/fonts/Open\ Sans\ Italic/0-255.pbf \
+	docs/openmaptiles/fonts/Open\ Sans\ Regular/0-255.pbf \
 	$(pbf) \
 	$(mbtiles) \
 	$(tilejson) \
 	$(zxy_metadata) \
-	$(stylejson) \
-	docs/openmaptiles/fonts/Open\ Sans\ Bold/0-255.pbf \
-	docs/openmaptiles/fonts/Open\ Sans\ Italic/0-255.pbf \
-	docs/openmaptiles/fonts/Open\ Sans\ Regular/0-255.pbf
+	$(stylejson)
 
 
 all: $(targets)
