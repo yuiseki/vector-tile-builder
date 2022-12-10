@@ -41,7 +41,7 @@ RUN apt-get update && apt-get install -y nodejs \
 
 RUN npm i -g http-server
 RUN npm i -g mbtiles2tilejson
-RUN git clone --depth -1 https://github.com/unvt/charites &&\
+RUN git clone --depth 1 https://github.com/unvt/charites &&\
   cd charites; npm ci; npm run build; npm install -g .
 
 RUN git clone --depth 1 https://github.com/systemed/tilemaker &&\
