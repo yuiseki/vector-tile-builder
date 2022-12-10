@@ -6,23 +6,14 @@ RUN apt-get update && \
   apt-get -y upgrade && \
   apt-get -y install \
   sudo \
-  curl \
   git \
-  vim \
+  curl \
+  wget \
+  make \
+  tmux \
   htop \
-  jq \
-  make
-
-WORKDIR /app
-
-RUN curl -Ls https://deb.nodesource.com/setup_18.x | bash
-RUN apt-get update && apt-get install -y nodejs \
-      && rm -rf /var/lib/apt/lists/*
-
-RUN npm i -g http-server
-RUN npm i -g mbtiles2tilejson
-RUN git clone --depth 1 https://github.com/unvt/charites &&\
-  cd charites; npm ci; npm run build; npm install -g .
+  vim \
+  jq
 
 RUN useradd -m user
 
