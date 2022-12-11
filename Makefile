@@ -34,7 +34,6 @@ clean-all:
 	rm -rf docs/openmaptiles/fonts/Open\ Sans\ Bold
 	rm -rf docs/openmaptiles/fonts/Open\ Sans\ Italic
 	rm -rf docs/openmaptiles/fonts/Open\ Sans\ Regular
-	docker rmi $(docker images | grep 'vector-tile-builder')
 
 # Pull `yuiseki/vector-tile-builder` docker image if not exists
 .PHONY: docker-pull
