@@ -13,7 +13,6 @@ targets = \
 	docs/openmaptiles/fonts/Open\ Sans\ Regular/0-255.pbf \
 	$(pbf) \
 	$(mbtiles) \
-	$(pmtiles) \
 	$(tilejson) \
 	$(zxy_metadata) \
 	$(stylejson)
