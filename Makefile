@@ -2,6 +2,7 @@ include .env
 
 pbf = tmp/osm/$(REGION)-latest.osm.pbf
 mbtiles = tmp/region.mbtiles
+pmtiles = tmp/region.pmtiles
 tilejson = docs/tiles.json
 stylejson = docs/style.json
 zxy_metadata = docs/zxy/metadata.json
@@ -12,6 +13,7 @@ targets = \
 	docs/openmaptiles/fonts/Open\ Sans\ Regular/0-255.pbf \
 	$(pbf) \
 	$(mbtiles) \
+	$(pmtiles) \
 	$(tilejson) \
 	$(zxy_metadata) \
 	$(stylejson)
@@ -40,6 +42,11 @@ clean-all:
 docker-pull:
 	docker image inspect yuiseki/vector-tile-builder:latest > /dev/null || docker pull yuiseki/vector-tile-builder:latest
 
+.PHONY: docker-pull-all
+docker-pull-all:
+	docker image inspect ghcr.io/protomaps/go-pmtiles:master > /dev/null || docker pull ghcr.io/protomaps/go-pmtiles:master
+	docker image inspect maptiler/tileserver-gl:latest > /dev/null || docker pull maptiler/tileserver-gl:latest
+
 # Build `yuiseki/vector-tile-builder` docker image if not exists
 .PHONY: docker-build
 docker-build:
@@ -59,6 +66,9 @@ $(pbf):
 		--output $(pbf) \
 		https://download.geofabrik.de/$(REGION)-latest.osm.pbf
 
+#
+# tilemaker
+#
 # Convert Protocolbuffer Binary format file to MBTiles format file
 $(mbtiles):
 	mkdir -p $(@D)
@@ -73,6 +83,19 @@ $(mbtiles):
 				--input /$(pbf) \
 				--output /$(mbtiles)
 
+#
+# go-pmtiles
+#
+# Convert Protocolbuffer Binary format file to MBTiles format file
+$(pmtiles):
+	mkdir -p $(@D)
+	docker run \
+		-i \
+		--rm \
+		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
+		ghcr.io/protomaps/go-pmtiles \
+			pmtiles convert /$(mbtiles) /$(pmtiles)
+
 # Generate TileJSON format file from MBTiles format file
 $(tilejson):
 	mkdir -p $(@D)
@@ -86,6 +109,9 @@ $(tilejson):
 				--url $(TILES_URL) > docs/tiles.json
 	sed "s|http://localhost:5000/|$(BASE_PATH)|g" -i docs/tiles.json
 
+#
+# tippecanoe
+#
 # Split MBTiles format file to zxy orderd Protocolbuffer Binary format files
 $(zxy_metadata):
 	mkdir -p $(@D)
@@ -103,6 +129,9 @@ $(zxy_metadata):
 				/$(mbtiles)
 	cp -r tmp/zxy docs/
 
+#
+# charites
+#
 # Generate style.json from style.yml
 $(stylejson):
 	docker run \
