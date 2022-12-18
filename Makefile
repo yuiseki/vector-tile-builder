@@ -44,12 +44,12 @@ docker-pull:
 
 .PHONY: docker-pull-all
 docker-pull-all:
-	docker image inspect ghcr.io/protomaps/go-pmtiles:master > /dev/null || docker pull ghcr.io/protomaps/go-pmtiles:master
 	docker image inspect maptiler/tileserver-gl:latest > /dev/null || docker pull maptiler/tileserver-gl:latest
 
 # Build `yuiseki/vector-tile-builder` docker image if not exists
 .PHONY: docker-build
 docker-build:
+	docker image inspect yuiseki/go-pmtiles:latest > /dev/null || docker build -t yuiseki/go-pmtiles:latest github.com/protomaps/go-pmtiles#main
 	docker image inspect yuiseki/vector-tile-builder:latest > /dev/null || docker build . -t yuiseki/vector-tile-builder:latest
 
 # Push `yuiseki/vector-tile-builder` docker image to docker hub
@@ -86,15 +86,15 @@ $(mbtiles):
 #
 # go-pmtiles
 #
-# Convert Protocolbuffer Binary format file to MBTiles format file
+# Convert MBTiles format file to PMtiles format file
 $(pmtiles):
 	mkdir -p $(@D)
 	docker run \
 		-i \
 		--rm \
 		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
-		ghcr.io/protomaps/go-pmtiles \
-			pmtiles convert /$(mbtiles) /$(pmtiles)
+		protomaps/go-pmtiles \
+			convert /$(mbtiles) /$(pmtiles)
 
 # Generate TileJSON format file from MBTiles format file
 $(tilejson):
