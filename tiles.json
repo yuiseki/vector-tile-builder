@@ -10,14 +10,14 @@
   "minzoom": 0,
   "maxzoom": 14,
   "bounds": [
-    1.412368,
-    42.4276,
-    1.787481,
-    42.65717
+    139.762267,
+    35.694803,
+    139.809803,
+    35.731623
   ],
   "center": [
-    1.599925,
-    42.542385,
+    139.786035,
+    35.713213,
     7
   ],
   "vector_layers": [
@@ -25,9 +25,7 @@
       "id": "place",
       "fields": {
         "class": "String",
-        "iso_a2": "String",
-        "name:latin": "String",
-        "rank": "Number"
+        "name:latin": "String"
       },
       "minzoom": 0,
       "maxzoom": 14
@@ -63,7 +61,6 @@
     {
       "id": "waterway",
       "fields": {
-        "brunnel": "String",
         "class": "String",
         "intermittent": "Number",
         "name:latin": "String"
@@ -107,8 +104,7 @@
     {
       "id": "water",
       "fields": {
-        "class": "String",
-        "intermittent": "String"
+        "class": "String"
       },
       "minzoom": 6,
       "maxzoom": 14
@@ -124,10 +120,7 @@
     },
     {
       "id": "aeroway",
-      "fields": {
-        "class": "String",
-        "ref": "String"
-      },
+      "fields": {},
       "minzoom": 11,
       "maxzoom": 14
     },
@@ -139,10 +132,7 @@
     },
     {
       "id": "park",
-      "fields": {
-        "class": "String",
-        "name:latin": "String"
-      },
+      "fields": {},
       "minzoom": 11,
       "maxzoom": 14
     },
