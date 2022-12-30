@@ -1,6 +1,10 @@
 include .env
 
-pbf = tmp/osm/$(REGION)-latest.osm.pbf
+region_pbf = tmp/osm/$(REGION)-latest.osm.pbf
+admin_osmjson = tmp/$(ADMIN).osm.json
+admin_geojson = tmp/$(ADMIN).geojson
+admin_poly = tmp/$(ADMIN).poly
+admin_pbf = tmp/$(ADMIN).pbf
 mbtiles = tmp/region.mbtiles
 pmtiles = tmp/region.pmtiles
 tilejson = docs/tiles.json
@@ -11,7 +15,11 @@ targets = \
 	docs/openmaptiles/fonts/Open\ Sans\ Bold/0-255.pbf \
 	docs/openmaptiles/fonts/Open\ Sans\ Italic/0-255.pbf \
 	docs/openmaptiles/fonts/Open\ Sans\ Regular/0-255.pbf \
-	$(pbf) \
+	$(region_pbf) \
+	$(admin_osmjson) \
+	$(admin_geojson) \
+	$(admin_poly) \
+	$(admin_pbf) \
 	$(mbtiles) \
 	$(tilejson) \
 	$(zxy_metadata) \
@@ -27,11 +35,16 @@ clean:
 	rm -f docs/tiles.json
 
 clean-all:
-	rm -f tmp/region.mbtiles
+	sudo chmod 777 -R tmp
+	rm -f $(admin_osmjson)
+	rm -f $(admin_geojson)
+	rm -f $(admin_poly)
+	rm -f $(admin_pbf)
+	rm -f $(mbtiles)
+	rm -f $(tilejson)
+	rm -f $(stylejson)
 	rm -rf tmp/zxy/*
 	rm -rf docs/zxy/*
-	rm -f docs/tiles.json
-	rm -f docs/style.json
 	rm -rf docs/openmaptiles/fonts/Open\ Sans\ Bold
 	rm -rf docs/openmaptiles/fonts/Open\ Sans\ Italic
 	rm -rf docs/openmaptiles/fonts/Open\ Sans\ Regular
@@ -58,12 +71,43 @@ docker-push:
 	docker push yuiseki/vector-tile-builder:latest
 
 # Download OpenStreetMap data as Protocolbuffer Binary format file
-$(pbf):
+$(region_pbf):
 	mkdir -p $(@D)
 	curl \
 		--continue-at - \
-		--output $(pbf) \
+		--output $(region_pbf) \
 		https://download.geofabrik.de/$(REGION)-latest.osm.pbf
+
+$(admin_osmjson):
+	curl 'https://overpass-api.de/api/interpreter' \
+		--data-urlencode 'data=[out:json][timeout:30000]; area["name:en"="$(ADMIN)"]; relation(area)["type"="boundary"]["boundary"="administrative"]["name"]; out geom;' > $(admin_osmjson)
+
+$(admin_geojson):
+	docker run \
+		-i \
+		--rm \
+		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
+		yuiseki/vector-tile-builder \
+			bash -c "\
+				osmtogeojson /$(admin_osmjson) > /$(admin_geojson)\
+			"
+
+$(admin_poly):
+	docker run \
+		-i \
+		--rm \
+		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
+		yuiseki/vector-tile-builder \
+			geojson2poly /$(admin_geojson) /$(admin_poly)
+
+$(admin_pbf):
+	docker run \
+		-i \
+		--rm \
+		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
+		yuiseki/vector-tile-builder \
+			osmconvert /$(region_pbf) -B="/$(admin_poly)" --complete-ways -o=/$(admin_pbf)
+
 
 #
 # tilemaker
@@ -79,7 +123,7 @@ $(mbtiles):
 			tilemaker \
 				--threads 3 \
 				--skip-integrity \
-				--input /$(pbf) \
+				--input /$(admin_pbf) \
 				--output /$(mbtiles)
 
 #
