@@ -78,9 +78,10 @@ $(region_pbf):
 		--output $(region_pbf) \
 		https://download.geofabrik.de/$(REGION)-latest.osm.pbf
 
+QUERY = data=[out:json][timeout:30000]; area["name:en"="$(ADMIN)"]; relation(area)["type"="boundary"]["boundary"="administrative"]["name"]; out geom;
 $(admin_osmjson):
 	curl 'https://overpass-api.de/api/interpreter' \
-		--data-urlencode 'data=[out:json][timeout:30000]; area["name:en"="$(ADMIN)"]; relation(area)["type"="boundary"]["boundary"="administrative"]["name"]; out geom;' > $(admin_osmjson)
+		--data-urlencode '$(QUERY)' > $(admin_osmjson)
 
 $(admin_geojson):
 	docker run \
