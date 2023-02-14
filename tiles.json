@@ -120,7 +120,9 @@
     },
     {
       "id": "aeroway",
-      "fields": {},
+      "fields": {
+        "class": "String"
+      },
       "minzoom": 11,
       "maxzoom": 14
     },
