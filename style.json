@@ -44,11 +44,11 @@
   "sources": {
     "openmaptiles": {
       "type": "vector",
-      "url": "https://yuiseki.github.io/vector-tile-builder/tiles.json"
+      "url": "http://yu-pi-main.local/tiles.json"
     }
   },
-  "sprite": "https://yuiseki.github.io/vector-tile-builder/openmaptiles/osm-bright-gl-style/sprite",
-  "glyphs": "https://yuiseki.github.io/vector-tile-builder/openmaptiles/fonts/{fontstack}/{range}.pbf",
+  "sprite": "http://yu-pi-main.local/openmaptiles/osm-bright-gl-style/sprite",
+  "glyphs": "http://yu-pi-main.local/openmaptiles/fonts/{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "background",

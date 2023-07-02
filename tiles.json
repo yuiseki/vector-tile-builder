@@ -10,14 +10,14 @@
   "minzoom": 0,
   "maxzoom": 14,
   "bounds": [
-    139.762267,
-    35.694803,
-    139.809803,
-    35.731623
+    20.014284,
+    41.713911,
+    27.299796,
+    43.273331
   ],
   "center": [
-    139.786035,
-    35.713213,
+    23.65704,
+    42.493621,
     7
   ],
   "vector_layers": [
@@ -61,6 +61,7 @@
     {
       "id": "waterway",
       "fields": {
+        "brunnel": "String",
         "class": "String",
         "intermittent": "Number",
         "name:latin": "String"
@@ -104,7 +105,8 @@
     {
       "id": "water",
       "fields": {
-        "class": "String"
+        "class": "String",
+        "intermittent": "String"
       },
       "minzoom": 6,
       "maxzoom": 14
@@ -121,20 +123,27 @@
     {
       "id": "aeroway",
       "fields": {
-        "class": "String"
+        "class": "String",
+        "ref": "String"
       },
       "minzoom": 11,
       "maxzoom": 14
     },
     {
       "id": "aerodrome_label",
-      "fields": {},
+      "fields": {
+        "class": "String",
+        "name:latin": "String"
+      },
       "minzoom": 10,
       "maxzoom": 14
     },
     {
       "id": "park",
-      "fields": {},
+      "fields": {
+        "class": "String",
+        "name:latin": "String"
+      },
       "minzoom": 11,
       "maxzoom": 14
     },
@@ -169,6 +178,6 @@
     }
   ],
   "tiles": [
-    "https://yuiseki.github.io/vector-tile-builder/zxy/{z}/{x}/{y}.pbf"
+    "http://yu-pi-main.local/zxy/{z}/{x}/{y}.pbf"
   ]
 }
