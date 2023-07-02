@@ -6,10 +6,12 @@ admin_geojson = tmp/$(ADMIN).geojson
 admin_poly = tmp/$(ADMIN).poly
 admin_pbf = tmp/$(ADMIN).pbf
 mbtiles = tmp/region.mbtiles
-pmtiles = tmp/region.pmtiles
 tilejson = docs/tiles.json
 stylejson = docs/style.json
 zxy_metadata = docs/zxy/metadata.json
+pmtiles = tmp/region.pmtiles
+pmtiles_docs = docs/region.pmtiles
+pmtiles_stylejson = docs/style.pmtiles.json
 
 targets = \
 	docs/openmaptiles/fonts/Open\ Sans\ Bold/0-255.pbf \
@@ -23,18 +25,24 @@ targets = \
 	$(mbtiles) \
 	$(tilejson) \
 	$(zxy_metadata) \
-	$(stylejson)
-
+	$(stylejson) \
+	$(pmtiles) \
+	$(pmtiles_docs) \
+	$(pmtiles_stylejson)
 
 all: $(targets)
 
 clean:
 	sudo chmod 777 -R tmp
 	rm -rf docs/zxy/*
-	rm -f docs/style.json
-	rm -f docs/tiles.json
+	rm -f $(mbtiles)
+	rm -f $(stylejson)
+	rm -f $(tilejson)
+	rm -f $(pmtiles)
+	rm -f $(pmtiles_docs)
+	rm -f $(pmtiles_stylejson)
 
-clean-all:
+clean-all: clean
 	sudo chmod 777 -R tmp
 	rm -f $(admin_osmjson)
 	rm -f $(admin_geojson)
@@ -43,16 +51,24 @@ clean-all:
 	rm -f $(mbtiles)
 	rm -f $(tilejson)
 	rm -f $(stylejson)
+	rm -f $(pmtiles)
+	rm -f $(pmtiles_docs)
+	rm -f $(pmtiles_stylejson)
 	rm -rf tmp/zxy/*
 	rm -rf docs/zxy/*
 	rm -rf docs/openmaptiles/fonts/Open\ Sans\ Bold
 	rm -rf docs/openmaptiles/fonts/Open\ Sans\ Italic
 	rm -rf docs/openmaptiles/fonts/Open\ Sans\ Regular
 
+
+#
+# docker
+#
 # Pull `yuiseki/vector-tile-builder` docker image if not exists
 .PHONY: docker-pull
 docker-pull:
 	docker image inspect yuiseki/vector-tile-builder:latest > /dev/null || docker pull yuiseki/vector-tile-builder:latest
+	docker image inspect yuiseki/go-pmtiles:latest > /dev/null || docker pull yuiseki/go-pmtiles:latest
 
 .PHONY: docker-pull-all
 docker-pull-all:
@@ -61,14 +77,15 @@ docker-pull-all:
 # Build `yuiseki/vector-tile-builder` docker image if not exists
 .PHONY: docker-build
 docker-build:
-	docker image inspect yuiseki/go-pmtiles:latest > /dev/null || docker build -t yuiseki/go-pmtiles:latest github.com/protomaps/go-pmtiles#main
 	docker image inspect yuiseki/vector-tile-builder:latest > /dev/null || docker build . -t yuiseki/vector-tile-builder:latest
+	docker image inspect yuiseki/go-pmtiles:latest > /dev/null || docker build -t yuiseki/go-pmtiles:latest github.com/protomaps/go-pmtiles#main
 
 # Push `yuiseki/vector-tile-builder` docker image to docker hub
 # MEMO: require `docker login`
 .PHONY: docker-push
 docker-push:
 	docker push yuiseki/vector-tile-builder:latest
+	docker push yuiseki/go-pmtiles:latest
 
 # Download OpenStreetMap data as Protocolbuffer Binary format file
 $(region_pbf):
@@ -124,21 +141,9 @@ $(mbtiles):
 			tilemaker \
 				--threads 3 \
 				--skip-integrity \
-				--input /$(admin_pbf) \
+				--input /$(region_pbf) \
 				--output /$(mbtiles)
 
-#
-# go-pmtiles
-#
-# Convert MBTiles format file to PMtiles format file
-$(pmtiles):
-	mkdir -p $(@D)
-	docker run \
-		-i \
-		--rm \
-		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
-		yuiseki/go-pmtiles \
-			convert /$(mbtiles) /$(pmtiles)
 
 # Generate TileJSON format file from MBTiles format file
 $(tilejson):
@@ -152,6 +157,7 @@ $(tilejson):
 				/tmp/region.mbtiles \
 				--url $(TILES_URL) > docs/tiles.json
 	sed "s|http://localhost:5000/|$(BASE_PATH)|g" -i docs/tiles.json
+
 
 #
 # tippecanoe
@@ -173,6 +179,7 @@ $(zxy_metadata):
 				/$(mbtiles)
 	cp -r tmp/zxy docs/
 
+
 #
 # charites
 #
@@ -185,6 +192,28 @@ $(stylejson):
 		yuiseki/vector-tile-builder \
 			charites build style.yml docs/style.json
 	sed "s|http://localhost:5000/|$(BASE_PATH)|g" -i docs/style.json
+
+
+#
+# go-pmtiles
+#
+# Convert MBTiles format file to PMtiles format file
+$(pmtiles):
+	mkdir -p $(@D)
+	docker run \
+		-i \
+		--rm \
+		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
+		yuiseki/go-pmtiles \
+			convert /$(mbtiles) /$(pmtiles)
+
+$(pmtiles_docs): $(pmtiles)
+	cp -f $(pmtiles) $(pmtiles_docs)
+
+$(pmtiles_stylejson): $(stylejson)
+	cp -f $(stylejson) $(pmtiles_stylejson)
+	sed "s|$(BASE_PATH)tile.json|pmtiles://$(BASE_PATH)region.pmtiles|g" -i $(pmtiles_stylejson)
+
 
 docs/openmaptiles/fonts/Open\ Sans\ Bold/0-255.pbf:
 	cd docs/openmaptiles/fonts && unzip Open\ Sans\ Bold.zip
