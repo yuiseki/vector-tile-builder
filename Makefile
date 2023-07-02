@@ -137,7 +137,7 @@ $(pmtiles):
 		-i \
 		--rm \
 		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
-		protomaps/go-pmtiles \
+		yuiseki/go-pmtiles \
 			convert /$(mbtiles) /$(pmtiles)
 
 # Generate TileJSON format file from MBTiles format file
