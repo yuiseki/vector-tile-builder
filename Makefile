@@ -105,7 +105,7 @@ $(admin_geojson):
 		-i \
 		--rm \
 		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
-		yuiseki/vector-tile-builder \
+		yuiseki/vector-tile-builder:latest \
 			bash -c "\
 				osmtogeojson /$(admin_osmjson) > /$(admin_geojson)\
 			"
@@ -115,7 +115,7 @@ $(admin_poly):
 		-i \
 		--rm \
 		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
-		yuiseki/vector-tile-builder \
+		yuiseki/vector-tile-builder:latest \
 			geojson2poly /$(admin_geojson) /$(admin_poly)
 
 $(admin_pbf):
@@ -123,7 +123,7 @@ $(admin_pbf):
 		-i \
 		--rm \
 		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
-		yuiseki/vector-tile-builder \
+		yuiseki/vector-tile-builder:latest \
 			osmconvert /$(region_pbf) -B="/$(admin_poly)" --complete-ways -o=/$(admin_pbf)
 
 
@@ -137,7 +137,7 @@ $(mbtiles):
 		-i \
 		--rm \
 		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
-		yuiseki/vector-tile-builder \
+		yuiseki/vector-tile-builder:latest \
 			tilemaker \
 				--threads 3 \
 				--skip-integrity \
@@ -152,7 +152,7 @@ $(tilejson):
 		-i \
 		--rm \
 		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
-		yuiseki/vector-tile-builder \
+		yuiseki/vector-tile-builder:latest \
 			mbtiles2tilejson \
 				/tmp/region.mbtiles \
 				--url $(TILES_URL) > docs/tiles.json
@@ -169,7 +169,7 @@ $(zxy_metadata):
 		-i \
 		--rm \
 		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
-		yuiseki/vector-tile-builder \
+		yuiseki/vector-tile-builder:latest \
 			tile-join \
 				--force \
 				--no-tile-compression \
@@ -189,7 +189,7 @@ $(stylejson):
 		-i \
 		--rm \
 		--mount type=bind,source=$(CURDIR)/,target=/app \
-		yuiseki/vector-tile-builder \
+		yuiseki/vector-tile-builder:latest \
 			charites build style.yml docs/style.json
 	sed "s|http://localhost:5000/|$(BASE_PATH)|g" -i docs/style.json
 

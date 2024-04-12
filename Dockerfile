@@ -38,6 +38,7 @@ RUN apt-get -y install \
     libboost-iostreams-dev \
     libboost-program-options-dev \
     libboost-system-dev \
+    lua5.1 \
     liblua5.1-0-dev \
     libprotobuf-dev \
     libshp-dev \
@@ -45,13 +46,13 @@ RUN apt-get -y install \
     rapidjson-dev
 
 RUN git clone --depth 1 https://github.com/systemed/tilemaker &&\
-  cd tilemaker; make -j3 LDFLAGS="-latomic"; make install; cd .. &&\
+  cd tilemaker; make -j 3; make install; cd .. &&\
   cp tilemaker/resources/config-openmaptiles.json ./config.json &&\
   cp tilemaker/resources/process-openmaptiles.lua ./process.lua &&\
   rm -rf tilemaker
 
 RUN git clone --depth 1 https://github.com/felt/tippecanoe &&\
-  cd tippecanoe; make -j3 LDFLAGS="-latomic"; make install &&\
+  cd tippecanoe; make -j 3; make install &&\
   cd ..; rm -rf tippecanoe
 
 RUN curl -Ls https://deb.nodesource.com/setup_18.x | bash
