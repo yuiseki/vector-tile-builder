@@ -10,22 +10,25 @@
   "minzoom": 0,
   "maxzoom": 14,
   "bounds": [
-    20.014284,
-    41.713911,
-    27.299796,
-    43.273331
+    134.045154,
+    18.625054,
+    155.605818,
+    37.15988
   ],
   "center": [
-    23.65704,
-    42.493621,
+    144.825486,
+    27.892467,
     7
   ],
   "vector_layers": [
     {
       "id": "place",
       "fields": {
+        "capital": "Number",
         "class": "String",
-        "name:latin": "String"
+        "iso_a2": "String",
+        "name:latin": "String",
+        "rank": "Number"
       },
       "minzoom": 0,
       "maxzoom": 14
@@ -43,6 +46,9 @@
       "id": "poi",
       "fields": {
         "class": "String",
+        "indoor": "Boolean",
+        "layer": "Number",
+        "level": "Number",
         "name:latin": "String",
         "rank": "Number",
         "subclass": "String"
@@ -72,11 +78,19 @@
     {
       "id": "transportation",
       "fields": {
+        "access": "String",
+        "bicycle": "String",
         "brunnel": "String",
         "class": "String",
+        "foot": "String",
+        "horse": "String",
+        "layer": "Number",
         "oneway": "Number",
         "ramp": "Number",
-        "service": "String"
+        "service": "String",
+        "subclass": "String",
+        "surface": "String",
+        "toll": "Boolean"
       },
       "minzoom": 4,
       "maxzoom": 14
@@ -88,7 +102,8 @@
         "name:latin": "String",
         "network": "String",
         "ref": "String",
-        "ref_length": "Number"
+        "ref_length": "Number",
+        "subclass": "String"
       },
       "minzoom": 8,
       "maxzoom": 14
@@ -96,8 +111,15 @@
     {
       "id": "building",
       "fields": {
+        "class": "String",
+        "housenumber": "String",
+        "indoor": "Boolean",
+        "layer": "Number",
+        "name:latin": "String",
+        "rank": "Number",
         "render_height": "Number",
-        "render_min_height": "Number"
+        "render_min_height": "Number",
+        "subclass": "String"
       },
       "minzoom": 13,
       "maxzoom": 14
@@ -133,6 +155,10 @@
       "id": "aerodrome_label",
       "fields": {
         "class": "String",
+        "ele": "Number",
+        "ele_ft": "Number",
+        "iata": "String",
+        "icao": "String",
         "name:latin": "String"
       },
       "minzoom": 10,
@@ -178,6 +204,6 @@
     }
   ],
   "tiles": [
-    "http://yu-pi-main.local/zxy/{z}/{x}/{y}.pbf"
+    "https://yuiseki.github.io/vector-tile-builder/zxy/{z}/{x}/{y}.pbf"
   ]
 }
