@@ -107,7 +107,7 @@ $(admin_geojson):
 		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
 		yuiseki/vector-tile-builder:latest \
 			bash -c "\
-				osmtogeojson /$(admin_osmjson) > /$(admin_geojson)\
+				osmtogeojson /$(admin_osmjson) > /$(admin_geojson) \
 			"
 
 $(admin_poly):
