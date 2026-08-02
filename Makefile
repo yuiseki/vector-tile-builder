@@ -88,6 +88,7 @@ docker-push:
 $(region_pbf):
 	mkdir -p $(@D)
 	curl \
+		--location \
 		--continue-at - \
 		--output $(region_pbf) \
 		https://download.geofabrik.de/$(REGION)-latest.osm.pbf
