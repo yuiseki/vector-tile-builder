@@ -97,6 +97,7 @@ QUERY = data=[out:json][timeout:30000]; relation["name:en"="$(ADMIN)"]; out geom
 $(admin_osmjson):
 	curl 'https://overpass-api.de/api/interpreter' \
 		--user-agent 'vector-tile-builder (https://github.com/yuiseki/vector-tile-builder)' \
+		--retry 5 \
 		--data-urlencode '$(QUERY)' > $(admin_osmjson)
 
 $(admin_geojson):
