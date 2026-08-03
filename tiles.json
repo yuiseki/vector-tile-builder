@@ -87,6 +87,8 @@
         "layer": "Number",
         "oneway": "Number",
         "ramp": "Number",
+        "render_height": "Number",
+        "render_min_height": "Number",
         "service": "String",
         "subclass": "String",
         "surface": "String",
