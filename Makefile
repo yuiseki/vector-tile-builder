@@ -88,6 +88,7 @@ docker-push:
 $(region_pbf):
 	mkdir -p $(@D)
 	curl \
+		--location \
 		--continue-at - \
 		--output $(region_pbf) \
 		https://download.geofabrik.de/$(REGION)-latest.osm.pbf
@@ -95,6 +96,8 @@ $(region_pbf):
 QUERY = data=[out:json][timeout:30000]; relation["name:en"="$(ADMIN)"]; out geom;
 $(admin_osmjson):
 	curl 'https://overpass-api.de/api/interpreter' \
+		--user-agent 'vector-tile-builder (https://github.com/yuiseki/vector-tile-builder)' \
+		--retry 5 \
 		--data-urlencode '$(QUERY)' > $(admin_osmjson)
 
 $(admin_geojson):
@@ -104,7 +107,7 @@ $(admin_geojson):
 		--mount type=bind,source=$(CURDIR)/tmp,target=/tmp \
 		yuiseki/vector-tile-builder:latest \
 			bash -c "\
-				osmtogeojson /$(admin_osmjson) > /$(admin_geojson)\
+				osmtogeojson /$(admin_osmjson) > /$(admin_geojson) \
 			"
 
 $(admin_poly):
