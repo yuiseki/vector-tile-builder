@@ -1,5 +1,7 @@
 include .env
 
+.DELETE_ON_ERROR:
+
 region_pbf = tmp/osm/$(REGION)-latest.osm.pbf
 admin_osmjson = tmp/$(ADMIN).osm.json
 admin_geojson = tmp/$(ADMIN).geojson
@@ -90,6 +92,7 @@ $(region_pbf):
 	curl \
 		--location \
 		--continue-at - \
+		--fail \
 		--output $(region_pbf) \
 		https://download.geofabrik.de/$(REGION)-latest.osm.pbf
 
@@ -98,6 +101,8 @@ $(admin_osmjson):
 	curl 'https://overpass-api.de/api/interpreter' \
 		--user-agent 'vector-tile-builder (https://github.com/yuiseki/vector-tile-builder)' \
 		--retry 5 \
+		--retry-delay 30 \
+		--fail \
 		--data-urlencode '$(QUERY)' > $(admin_osmjson)
 
 $(admin_geojson):
